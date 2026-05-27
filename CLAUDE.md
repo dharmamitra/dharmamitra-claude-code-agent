@@ -161,7 +161,7 @@ not a metadata slot.
    - Source(s): typically a file under `sources/`, possibly in multiple canon languages (one file per language, named `<work>.<lang>.txt`). Or text the user pasted.
    - References: scan `references/` for prior translations (especially any partial translation of *this* work the user has already done), glossaries, named-entity lists, register notes. Plain text and Markdown work directly. For .docx, .pdf, .epub, use the **reference-reader** subagent to extract them first.
 2. **Build a translation brief.** Distil from the references: target language, register/style, terminology choices (Skt. *dharma* → "Dharma" not "phenomena", etc.), proper names. Write the brief to `output/translations/<work>.brief.md` so subsequent passes can re-read it.
-3. **Chunk the source.** Aim for **3–5 sentences (~80–150 source words) per chunk**. Break on sentence boundaries. If the text has natural units (śloka, gāthā, sūtra section markers), use those. Never cut mid-sentence.
+3. **Chunk the source.** Aim for **3–5 sentences (~80–150 source words) per chunk**. Break on sentence boundaries. If the text has natural units (śloka, gāthā, sūtra section markers), use those. Never cut mid-sentence. **Within each chunk, format the source as one sentence per line** — the DharmaMitra translation backend prefers this layout (improves sentence alignment and translation-example lookup). In the JSON body, the newlines appear as `\n` inside each `input_*` string.
 4. **Iterate, one chunk at a time.** For each chunk, POST to cat-translate with:
    - All available `input_*` witnesses for that chunk.
    - `context`: built in priority order (cap ~400 words):

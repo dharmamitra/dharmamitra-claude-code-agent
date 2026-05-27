@@ -43,8 +43,12 @@ It's the mechanism by which the user's running translation conditions the next c
      gāthā / sūtra section breaks) over arbitrary sentence counts.
    - Never split a sentence across chunks. If a single sentence is too long, send it
      alone — that's fine.
+   - **Within each chunk, format the source as one sentence per line** (literal
+     newline between sentences). The DharmaMitra translation backend prefers this
+     layout — it improves sentence alignment and translation-example lookup. In the
+     JSON body the newlines appear as `\n` escapes inside the `input_*` strings.
    - Number the chunks. Save the chunking plan to `output/translations/<work>.chunks.md`
-     so reruns line up.
+     so reruns line up. Preserve the one-sentence-per-line shape in the plan too.
 
 4. **Translate, one chunk at a time.**
    For each chunk, construct a JSON body and POST it via the wrapper:
@@ -52,17 +56,21 @@ It's the mechanism by which the user's running translation conditions the next c
    ```bash
    ./scripts/cat-translate.sh --pretty <<'JSON'
    {
-     "input_sanskrit": "...",
-     "input_tibetan":  "...",
+     "input_sanskrit": "first sentence of the chunk.\nsecond sentence.\nthird sentence.",
+     "input_tibetan":  "tib sentence 1.\ntib sentence 2.\ntib sentence 3.",
      "input_chinese":  "",
      "input_pali":     "",
-     "context":        "<see below — this is the mill's main lever>",
+     "context":        "<see below — the workflow's main lever>",
      "focus":          "equal",
      "target_language": "english",
      "style_instruction": "<verbatim from the brief>"
    }
    JSON
    ```
+
+   Note the `\n` between sentences in `input_*` — that's the one-sentence-per-line
+   format the backend expects. The `context` field is free-form prose and does
+   *not* need this treatment.
 
    - Use all available `input_*` for the chunk. Empty string for missing witnesses.
    - `focus`: `"equal"` unless the user nominated a base text. Switching to e.g.
