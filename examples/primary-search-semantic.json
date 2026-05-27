@@ -1,0 +1,7 @@
+{
+  "search_input": "the nature of mind is clear light",
+  "search_type": "semantic",
+  "filter_source_language": "bo",
+  "max_depth": 30,
+  "do_ranking": false
+}

@@ -1,0 +1,10 @@
+{
+  "input_sanskrit": "evaṃ mayā śrutam ekasmin samaye bhagavān śrāvastyāṃ viharati sma jetavane 'nāthapiṇḍadasyārāme",
+  "input_tibetan": "འདི་སྐད་བདག་གིས་ཐོས་པ་དུས་གཅིག་ན། བཅོམ་ལྡན་འདས་མཉན་ཡོད་ན་རྒྱལ་བུ་རྒྱལ་བྱེད་ཀྱི་ཚལ་མགོན་མེད་ཟས་སྦྱིན་གྱི་ཀུན་དགའ་ར་བ་ན་བཞུགས་སོ།",
+  "input_chinese": "",
+  "input_pali": "",
+  "context": "Opening formula of a Mahāyāna sūtra. Glossary: bhagavān → 'the Blessed One'; jetavana → 'Jeta Grove'.",
+  "focus": "equal",
+  "target_language": "english",
+  "style_instruction": "balanced, suitable for a published translation; render Sanskrit proper names in IAST"
+}

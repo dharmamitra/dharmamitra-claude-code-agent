@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(./scripts/cat-translate.sh:*)",
+      "Bash(./scripts/primary-search.sh:*)",
+      "Bash(./scripts/trim-primary.sh:*)",
+      "Bash(jq:*)",
+      "Bash(pandoc:*)",
+      "Bash(pdftotext:*)",
+      "Bash(textutil:*)",
+      "Bash(ls:*)",
+      "Bash(find:*)",
+      "Bash(wc:*)"
+    ]
+  }
+}
