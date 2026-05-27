@@ -1,3 +1,5 @@
+![DharmaMitra](assets/logo.jpg)
+
 # DharmaMitra Agent Starterpack
 
 Download this folder, open it in Claude Code, and you get a working setup for:
@@ -22,18 +24,9 @@ cd dharmamitra-claude-code-agent
 curl -LO https://github.com/dharmamitra/dharmamitra-claude-code-agent/archive/refs/heads/main.zip && unzip main.zip && cd dharmamitra-claude-code-agent-main
 ```
 
-Then, in either case:
+Then run `claude` in the folder.
 
-```bash
-# verify the endpoints
-./scripts/cat-translate.sh --file examples/cat-translate-sutra-opening.json --pretty
-./scripts/primary-search.sh --file examples/primary-search-semantic.json --trim
-
-# open in Claude Code
-claude
-```
-
-Requires: `curl` (preinstalled), `jq` (`brew install jq` / `apt install jq`), and Claude Code. Optional for binary references: `pandoc` + `poppler` (`brew install pandoc poppler`).
+Requires: `jq` (`brew install jq` / `apt install jq`) and Claude Code. Optional for binary references: `pandoc` + `poppler` (`brew install pandoc poppler`).
 
 ## Translating a text
 
