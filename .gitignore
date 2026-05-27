@@ -2,3 +2,9 @@
 *.swp
 .vscode/
 .idea/
+
+# User content: keep folder structure + READMEs, ignore everything else
+sources/*
+!sources/README.md
+references/*
+!references/README.md
