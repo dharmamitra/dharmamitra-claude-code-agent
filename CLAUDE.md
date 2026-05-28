@@ -68,9 +68,6 @@ Response: `{"translation": "<text>"}`. No metadata, no per-witness breakdown.
 **Latency**: 3–8 s typical, up to ~60 s for long inputs. Don't set `--max-time`
 below 90 s. Cloudflare upstream caps at 100 s → 524.
 
-**Rate limit (cat-translate)**: per-IP 200/min, 8 000/day. Generous for normal
-use; not something to worry about during a translation pass.
-
 ### 2. /primary/ — canonical corpus search
 
 Use when: the user wants to find passages in the canonical Buddhist corpus
@@ -139,11 +136,6 @@ The `--trim` flag on `primary-search.sh` does this for you, or pipe through
 `segmentnr` prefixes are reliable: `BO_` Tibetan, `SA_` Sanskrit, `PA_` Pali,
 `ZH_` Chinese. Use `src_link` verbatim when citing — don't construct your own
 URL.
-
-**Rate limit (primary)**: 400 req/day per IP, 500/day per /24 subnet. This is
-the real practical ceiling — budget your searches. For an agent doing
-follow-up queries on emendations, 30–50 well-chosen searches in a session is
-fine; spraying 200 queries through the day will burn the quota.
 
 ---
 

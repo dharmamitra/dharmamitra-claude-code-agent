@@ -60,7 +60,6 @@ your goal is to surface variants and emendations a human editor will then decide
    When a single word looks corrupt:
    - Do a follow-up `/primary/` with `search_type: "regular"` and that word as `search_input`. Restrict by language. This tells you how widely the reading is attested.
    - If you suspect the *original* form, search for that too. The pattern that wins emendations is: "the rare/anomalous reading X appears only here; the expected reading Y is attested in N other passages including these parallels."
-   - Cap follow-up searches — each one costs against the 400/day per-IP quota.
 
 6. **Optional: stylised back-translation of a variant.**
    When a variant's meaning is contested, you can run `cat-translate` on just that
@@ -111,7 +110,6 @@ your goal is to surface variants and emendations a human editor will then decide
 
 - `src_link` is the canonical citation URL — deep-links into the DharmaMitra reading room with the segment highlighted. **Use it verbatim**; do not construct your own URL.
 - Empty `/primary/` results don't mean "the answer is no". They mean the corpus contains nothing matching the query under the current filters. Try broadening `filter_source_language` to `"all"` and switching to `semantic_only` before concluding there's no parallel.
-- The 400/day per-IP limit on `/primary/` is real. Budget: 30–50 well-chosen searches across a session is fine; 200 sprayed queries will burn the quota and your follow-ups will 429. If you're about to fire a fifth follow-up search on the same word, stop and think whether you actually need it.
 - A `segmentnr` prefix is reliable: `BO_` Tibetan, `SA_` Sanskrit, `PA_` Pali, `ZH_` Chinese. The rest of the segmentnr format depends on the source and is not always parseable.
 - Don't propose emendations on metrical grounds without checking the metre actually scans on the proposed reading. If you're not confident scanning Sanskrit metres, say so — flag the candidate emendation but mark it `meter unverified`, don't assert it.
 - Write the apparatus in a register a human editor will recognise. They're going to copy-paste pieces of it into their actual edition. Citations need to be exact.

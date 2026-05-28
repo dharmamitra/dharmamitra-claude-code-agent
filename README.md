@@ -79,7 +79,7 @@ Two endpoints, both public, JSON in / JSON out, synchronous:
 | `POST /cat-translate/v1/translate` | Multi-witness translation with user-supplied context | `./scripts/cat-translate.sh` | 3–8 s |
 | `POST /primary/` | Search canonical corpus by meaning or exact text | `./scripts/primary-search.sh` | 0.3–3 s |
 
-Full reference and field schemas in `CLAUDE.md`. Rate limits: cat-translate is generous (8 000/day per IP); `/primary/` caps at **400/day per IP**, which is the real budget when scanning widely.
+Full reference and field schemas in `CLAUDE.md`.
 
 ## Customising
 
@@ -90,7 +90,6 @@ Full reference and field schemas in `CLAUDE.md`. Rate limits: cat-translate is g
 ## Troubleshooting
 
 - **Curl 524** — cat-translate hit the 100 s upstream cap. Chunk smaller.
-- **`/primary/` 429** — exceeded 400/day per IP. Wait or switch IP.
 - **0 results from `/primary/`** — broaden `filter_source_language` to `"all"`; switch to `search_type: "semantic_only"` for cross-script queries.
 - **`jq: command not found`** — `brew install jq` / `apt install jq`.
 - **Terminology drifting in a long translation** — open `output/translations/<work>.brief.md`, tighten the `style_instruction`, and tell Claude to restart from where drift began.

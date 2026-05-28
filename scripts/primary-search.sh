@@ -5,9 +5,8 @@
 # Sanskrit critical editions). Returns matched passages with segmentnr IDs and
 # deep-links into the DharmaMitra reading room. Typical latency 0.3–3 s.
 #
-# Rate limit: 400 req/day per IP. Use max_depth: 30 for agent use unless the
-# user explicitly asks to scan wide — 200 is the browser-UI default and wastes
-# the LLM's attention budget.
+# Use max_depth: 30 for agent use unless the user explicitly asks to scan wide
+# — 200 is the browser-UI default and wastes the LLM's attention budget.
 #
 # Usage:
 #   echo '{"search_input":"...", ...}' | ./scripts/primary-search.sh

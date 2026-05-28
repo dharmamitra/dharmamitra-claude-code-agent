@@ -11,4 +11,4 @@ Delegate to the **corpus-searcher** subagent. It will:
 2. Call `./scripts/primary-search.sh --trim` with `max_depth: 30` and `do_ranking: false`.
 3. Return a numbered list of hits with title, segmentnr, lang, excerpt, summary, and the verbatim `src_link`.
 
-Remember: 400 req/day per IP. If the first call returns 0 hits, broaden `filter_source_language` to `"all"` and switch to `semantic_only` before giving up. Don't fire more than 5 follow-up searches without consulting the user.
+If the first call returns 0 hits, broaden `filter_source_language` to `"all"` and switch to `semantic_only` before giving up.

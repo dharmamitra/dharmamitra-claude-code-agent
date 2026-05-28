@@ -53,7 +53,6 @@ If the user wants the raw JSON instead, give them the trimmed JSON directly.
 
 # Defaults & gotchas
 
-- 400 req/day per IP. Don't do more than ~5 searches in a row without consulting the user — if the first 5 don't surface what they want, the problem is the query strategy, not the result count.
 - `semantic` pivots through English. A Sanskrit technical term with no clean English equivalent (e.g. an isolated dharma-list term) may produce surprising hits. Falling back to `regular` is the standard fix.
 - 0 results does **not** mean "this isn't in the corpus." It means: this filter combination found nothing. Suggested fallbacks in order: broaden `filter_source_language` to `"all"`; switch to `semantic_only`; rewrite the query as a single distinctive phrase rather than a full sentence.
 - Use `src_link` verbatim for citations. Don't construct DharmaMitra URLs.
