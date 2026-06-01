@@ -13,7 +13,11 @@
 
 **Register:** Bhāṣya prose; sustained pūrvapakṣa–uttarapakṣa dialectic
 
-**Identified work:** **Dharmottara's *Nyāyabinduṭīkā*** (D4230 in the Derge Tengyur). The argument sequence *dṛśyānupalabdhi* → *kapālakāla* → *santānāntara* → *punarupalambha/pūrvatā* matches D4230 folios 10b–13b exactly. Pārthasārathi Miśra's *Śāstradīpikā* quotes the *dṛśyatā = darśanayogyatā tasyāmavasthāyāṃ nāstīti* definition verbatim, confirming the source. The Sanskrit of this section of the NBṭ is unedited; D4230 is the primary witness used for reconstruction.
+**Identified work:** **Vinītadeva's *Nyāyabinduprakaraṇa* (*Śiṣyahita*)** (D4230 in the Derge Tengyur; colophon: *sloB dpon dul ba'i lhas mdzad pa*, "composed by Ācārya Vinītadeva"; translated by Jinamitra and Yeshé Dé). The argument sequence *dṛśyānupalabdhi* → *kapālakāla* → *santānāntara* → *punarupalambha/pūrvatā* matches D4230 folios 10b–13b exactly in a single continuous passage. Dharmottara's *Nyāyabinduṭīkā* (D4231) contains the same technical terms but distributes them across folios 41a–67b in a different order, ruling it out as the source.
+
+Note on D4230/D4231 confusion: the DharmaMitra corpus metadata applies the generic label "nyāyabinduṭīkā" to both texts. The correct identification is: D4230 = Vinītadeva (*Śiṣyahita*); D4231 = Dharmottara. The colophon of D4230 (folio 36b-2) is explicit.
+
+Pārthasārathi Miśra's *Śāstradīpikā* (SA_GSP28_sastrdiu:3143) quotes the *dṛśyatā = darśanayogyatā tasyāmavasthāyāṃ nāstīti* definition verbatim — Pārthasārathi is now understood to be quoting Vinītadeva, not Dharmottara. The Sanskrit of this section of the *Nyāyabinduprakaraṇa* is unedited; D4230 is the primary witness used for reconstruction.
 
 ---
 
@@ -28,15 +32,15 @@ https://dharmamitra.org/nexus/db//sa/SA_T11_prpva/text?active_segment=SA_T11_prp
 **Verbatim match for L1 opening.** Pārthasārathi quotes Dharmottara's NBṭ directly.
 https://dharmamitra.org/nexus/db//sa/SA_GSP28_sastrdiu/text?active_segment=SA_GSP28_sastrdiu:3143
 
-**3. Dharmottara: Nyāyabinduṭīkā — BO_T11_D4230:10b-23 through 10b-31 (bo)**
-Definition of *upalabdhilakṣaṇaprāpta* as *upalambhapratyayāntarasampanna svabhāvaviśeṣavat*; the ground-and-jug example.
+**3. Vinītadeva: Nyāyabinduprakaraṇa (*Śiṣyahita*) — BO_T11_D4230:10b-23 through 10b-31 (bo)**
+Definition of *upalabdhilakṣaṇaprāpta* as *upalambhapratyayāntarasampanna svabhāvaviśeṣavat*; the ground-and-jug example. **Primary source text for the reconstruction.**
 https://dharmamitra.org/nexus/db//bo/BO_T11_D4230/text?active_segment=BO_T11_D4230:10b-23
 
-**4. Dharmottara: Nyāyabinduṭīkā — BO_T11_D4230:12a-29 through 12b-9 (bo)**
+**4. Vinītadeva: Nyāyabinduprakaraṇa (*Śiṣyahita*) — BO_T11_D4230:12a-29 through 12b-9 (bo)**
 Three-fold obstruction (*yul/dus/rang bzhin gyis bskal pa*); the *kapālakāla* argument.
 https://dharmamitra.org/nexus/db//bo/BO_T11_D4230/text?active_segment=BO_T11_D4230:12a-29
 
-**5. Dharmottara: Nyāyabinduṭīkā — BO_T11_D4230:13a-2 through 13b-7 (bo)**
+**5. Vinītadeva: Nyāyabinduprakaraṇa (*Śiṣyahita*) — BO_T11_D4230:13a-2 through 13b-7 (bo)**
 *Sarvasādhakapratyakṣa* argument; *avikalasmṛtisaṃskāra*; *pūrvatā* inaccessible to *pratyakṣa*; transition to eleven-fold typology.
 https://dharmamitra.org/nexus/db//bo/BO_T11_D4230/text?active_segment=BO_T11_D4230:13a-2
 
@@ -229,8 +233,12 @@ argument of the Tīrthikas is a [mere] meditation. It is not established by the 
 
 ## 6. Philological Notes
 
-**On the identification (Dharmottara's *Nyāyabinduṭīkā*):**
-The identification rests on four convergent lines of evidence: (1) argument sequence in D4230 matches the fragment exactly across folios 10b–13b; (2) the *avikalasmṛtisaṃskāra* compound (L4) is specific to Dharmottara; (3) the *sarvasādhakapratyakṣa* formula (L2) appears in D4230:13b-2; (4) Pārthasārathi Miśra's verbatim quotation of the *darśanayogyatā* definition confirms the NBṭ as his source. The Sanskrit of this section is unedited; the DharmaMitra corpus contains no Sanskrit parallels for the most distinctive phrases (`svaparasambhavī grāhyākāre bhedako`, `paścāddarśanānumeyāpi sthāyitā`), consistent with an unedited text.
+**On the identification (Vinītadeva's *Nyāyabinduprakaraṇa*):**
+The identification rests on three convergent lines of evidence: (1) the argument sequence in D4230 matches the fragment exactly across folios 10b–13b in a single continuous passage; (2) the *avikalasmṛtisaṃskāra* compound (L4) and the *sarvasādhakapratyakṣa* formula (L2) are both confirmed in D4230 at folios 12b–13b; (3) Pārthasārathi Miśra's verbatim quotation of the *darśanayogyatā* definition (SA_GSP28_sastrdiu:3143) matches the D4230 text precisely — Pārthasārathi is quoting Vinītadeva.
+
+Dharmottara's *Nyāyabinduṭīkā* (D4231) was checked and ruled out: although it contains both diagnostic compounds (*avikalasmṛtisaṃskāra* at 54a; *sarvasādhakapratyakṣa* at 53b), the four thematic clusters are distributed across folios 41a–67b in a different order from the fragment. Note that neither compound is exclusive to Dharmottara — both appear in Vinītadeva as well. The D4230/D4231 confusion in the DharmaMitra metadata (both labelled "nyāyabinduṭīkā") was resolved by the D4230 colophon (folio 36b-2), which names Vinītadeva explicitly.
+
+The Sanskrit of this section of the *Nyāyabinduprakaraṇa* is unedited; the DharmaMitra corpus contains no Sanskrit parallels for the most distinctive phrases (`svaparasambhavī grāhyākāre bhedako`, `paścāddarśanānumeyāpi sthāyitā`), consistent with an unedited text.
 
 **On the scribal fragment head:** The fragment begins `r vvināśaḥ` — the initial `r` is the end of the preceding word, almost certainly `niranvayavināśaḥ` (*destruction without remainder*) or `evaṃ vināśaḥ` (*thus destruction*). The *niranvayavināśa* reading would place this folio within the sustained treatment of momentary destruction in the NBṭ's inference chapter.
 
