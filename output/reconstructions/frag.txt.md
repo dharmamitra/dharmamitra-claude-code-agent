@@ -1,245 +1,382 @@
-# Folio Reconstruction: frag.txt
+# Folio Reconstruction: frag.txt (Tibetan-parallel pass, akṣara-constrained)
 
-## 1. Classification
-
-**School:** Pramāṇa (Dignāga/Dharmakīrti)
-
-**Opponents:** Mīmāṃsā (primary; *tīrthya* reference, *apūrva* implicit); Sāṃkhya (named explicitly, line 2: *sāṃkhyair abhyupagamāt*); Nyāya-Vaiśeṣika (implicit in *sāmānya/padārtha* arguments)
-
-**Topic:** Epistemological (three interlocking problems):
-1. Whether *anupalabdhi* (non-apprehension) of the pot at the sherd-moment (*kapālakāla*) establishes its non-existence, and what *dṛśyatā* (perceptibility) consists in
-2. Whether re-identification (*punarupalambha*) of a previously perceived object across temporal moments is possible via *pratyakṣa* or *anumāna*
-3. The privacy of perceptual streams across mental continua (*santānāntara*)
-
-**Register:** Bhāṣya prose; sustained pūrvapakṣa–uttarapakṣa dialectic
-
-**Identified work:** **Vinītadeva's *Nyāyabinduprakaraṇa* (*Śiṣyahita*)** (D4230 in the Derge Tengyur; colophon: *sloB dpon dul ba'i lhas mdzad pa*, "composed by Ācārya Vinītadeva"; translated by Jinamitra and Yeshé Dé). The argument sequence *dṛśyānupalabdhi* → *kapālakāla* → *santānāntara* → *punarupalambha/pūrvatā* matches D4230 folios 10b–13b exactly in a single continuous passage. Dharmottara's *Nyāyabinduṭīkā* (D4231) contains the same technical terms but distributes them across folios 41a–67b in a different order, ruling it out as the source.
-
-Note on D4230/D4231 confusion: the DharmaMitra corpus metadata applies the generic label "nyāyabinduṭīkā" to both texts. The correct identification is: D4230 = Vinītadeva (*Śiṣyahita*); D4231 = Dharmottara. The colophon of D4230 (folio 36b-2) is explicit.
-
-Pārthasārathi Miśra's *Śāstradīpikā* (SA_GSP28_sastrdiu:3143) quotes the *dṛśyatā = darśanayogyatā tasyāmavasthāyāṃ nāstīti* definition verbatim — Pārthasārathi is now understood to be quoting Vinītadeva, not Dharmottara. The Sanskrit of this section of the *Nyāyabinduprakaraṇa* is unedited; D4230 is the primary witness used for reconstruction.
+**Run date:** 2026-06-11. Supersedes the 2026-06-09 report. Two things are new:
+(1) lacuna sizes are now respected — one ellipsis in the source ≈ one lost akṣara
+(budgets 51–59 akṣaras per line); (2) the Tibetan evidence has been re-examined
+from scratch, and the earlier identification is **retracted**.
 
 ---
 
-## 2. Corpus Parallels
+## 1. Classification
 
-**1. Prajñākaragupta: Pramāṇavārttikālaṃkāra — SA_T11_prpva:1684 (sa)**
-> "keyaṃ dṛśyatā nāma... nanu na tirobhāvo vinaṣṭānabhivyakyostulya eva"
-https://dharmamitra.org/nexus/db//sa/SA_T11_prpva/text?active_segment=SA_T11_prpva:1684
+**School:** Buddhist pramāṇa (Dharmakīrtian), kṣaṇabhaṅga literature.
 
-**2. Pārthasārathi Miśra: Śāstradīpikā — SA_GSP28_sastrdiu:3143 (sa)**
-> "dṛśyatā darśanayogyatā tasyāmavasthāyāṃ nāstīti tena rūpeṇābhāvāt dṛśyaṃ nāstīty ucyate"
-**Verbatim match for L1 opening.** Pārthasārathi quotes Dharmottara's NBṭ directly.
+**Identification status: UNIDENTIFIED — earlier attribution retracted.**
+The 2026-06 identification as Vinītadeva's *Nyāyabinduṭīkā* (D4230) is **wrong**:
+the actual Tibetan of D4230 folios 10b–13b (local witness TD4230E.TXT) contains
+none of the fragment's signature material — no *gyo mo* (kapāla), no *tho ba/dbyig pa*
+(mudgara), no *grangs can* (Sāṃkhya) in the relevant stretch. Verbatim Sanskrit
+searches on the fragment's rarest wording (*bhasmīkārya*, *punastambhādau*,
+*pratibhāsabhedaḥ svaparasambhavī*) return **zero** hits in the DharmaMitra corpus,
+and an exhaustive signature-collocation scan of the entire local Tengyur tsad-ma
+section (29 texts incl. D4210–D4268, plus a full-Tengyur sweep for *gyo mo'i dus*
+and *grangs can gyis khas blangs*) found **no direct Tibetan translation**.
+
+The folio is therefore from a Sanskrit work that is otherwise lost or unedited,
+and which was **not translated into Tibetan**. Its closest doctrinal relatives are
+Dharmottara's *Kṣaṇabhaṅgasiddhi* (D4253, Tibetan only) and its orbit
+(Muktākalaśa's *Kṣaṇabhaṅgasiddhivivaraṇa* D4254; Dharmottara's
+*Pramāṇaviniścayaṭīkā* D4228); the polemical register (*atipāpīyaḥ*, *atijaḍaiḥ*,
+*tīrthyā yuktiḥ*) and the argument inventory point to Dharmottara's circle.
+
+**Opponents:** a sthiravādin (Naiyāyika-style) defender of persistence via
+pratyabhijñā; Sāṃkhya satkāryavāda cited by name (line 2, *sāṃkhyair abhyupagamāt*).
+
+**Topic sequence:** (1) vināśa of the pot established at *kapālakāla* by
+anupalabdhi; what *dṛśyatā* (= *darśanayogyatā*) consists in; (2) the Sāṃkhya
+accept the existence of the unperceived; mere non-acceptance is no pramā;
+(3) neither pratyakṣa nor anumāna establishes that the very thing seen by me is
+seen by another (*parasantāna* is parokṣa; inference grasps only *sāmānya* —
+from another smoke only a same-kind fire); (4) *pratibhāsabheda*; "I perceive
+that again" is not given in the first seeing; (5–6) re-seeing cannot operate on
+the past: *pūrvakālāditā* cannot appear; what appears vividly is present, not
+past; (7) appearance-difference forbids object-identity; "previously-seen-ness
+is grasped" is *atipāpīyaḥ*; (8) neither pratyakṣa nor anumāna is a pramāṇa for
+*pūrvadṛṣṭatā*.
+
+**Register:** terse, aggressive bhāṣya polemic.
+
+---
+
+## 2. Tibetan and Sanskrit Parallels
+
+No witness translates this text. The following are the genuinely closest
+parallels (same arguments, partly same wording), located this run by
+signature-scanning the local Tengyur e-texts and verified against DharmaMitra.
+
+### Tibetan (kṣaṇabhaṅga corpus, Sanskrit lost)
+
+**T1. Dharmottara, *Kṣaṇabhaṅgasiddhi* — BO_T11_D4253:254b-0/254b-5** (local: TD4253E.TXT, fol. 254b)
+> ji ltar tho ba la sogs pa rnams gyo mo'i gnas skabs skye ba la rjes su 'gro ba
+> dang ldog pa'i rjes su byed pa yin nam 'on te bum pa la sogs pa 'jig pa[r] byed
+> pa 'am, yang na ldog pa tzam sgrub ces the tsom za ba'o
+"Do the hammer etc. positively/negatively accompany the arising of the
+sherd-state, or cause the pot's destruction, or establish mere cessation?" —
+the fragment's L1 mudgara/kapāla problem.
+https://dharmamitra.org/nexus/db//bo/BO_T11_D4253/text?active_segment=BO_T11_D4253:254b-5
+
+**T2. Dharmottara, *Kṣaṇabhaṅgasiddhi* — D4253 fol. 250b–251a** (multi-observer recognition)
+> gang la shin tu tha dad pa srid pa de la ni dran pa dang ngo shes pa la sogs pa
+> mi srid par mthong ste, lha sbyin mthong ba dang ldan pa ni mchod sbyin la …
+> gzhan gyi dran pa ma yin no
+"Where utter difference obtains, memory and recognition are impossible — one
+who has seen is Devadatta, Yajñadatta [does not remember it]; one person's
+memory is not another's." — the fragment's L3 parasantāna argument.
+
+**T3. Dharmottara, *Kṣaṇabhaṅgasiddhi* — D4253 fol. 256b–257b** (pratyabhijñā refutation)
+> de zhes bya ba ni lkog tu gyur par bzung ba yin na 'di zhes bya ba ni mngon sum
+> du 'gyur ba yin na, de la ngo shes pas lkog tu gyur pa dang mngon sum du gyur pa
+> mtsams sbyor bar byed … ngo shes pas ni tha dad pa dag gcig tu sre bar byed pa
+> yin gyi tha dad pa med pa'i rang bzhin dmigs pa ni ma yin
+"In [the recognition *tad evedam*] the *tad* grasps something parokṣa, the *idam*
+something pratyakṣa; recognition merely conjoins the hidden and the perceived …
+recognition fuses distinct things into one; it does not perceive a non-distinct
+nature." — the fragment's L5 "*tad evedam adyāpy āsta iti vyavasāyāt*" and the
+L7 jñānāntara argument.
+
+**T4. Dharmottara, *Pramāṇaviniścayaṭīkā* — D4228 fol. 220a** (local: TD4228E.TXT)
+> de'i dbang gis zhes bya ba ni gyo mor gyur ba'i dbang gis …; phyis zhes bya ba
+> ni gyo mo nges pa na de bum pa'i skad cig ma tha ma mthong ba las dus phyis so,
+> dus der bum pa'i skad cig ma rnam par gzhag par bya'o
+"'Later' means: when the sherd is ascertained, after the pot's last seen moment;
+at that time the pot's [last moment] is posited (*vyavasthāpya*)." — the
+fragment's L1 "*kapālakāle 'nupalambhāt, tadvyavasthānāt*."
+
+**T5. Muktākalaśa, *Kṣaṇabhaṅgasiddhivivaraṇa* — D4254** (local: TD4254E.TXT)
+Sustained pratyabhijñā discussion (*ngo shes* ×21), anupalabdhi as
+vyāpakānupalabdhi establishing kṣaṇikatva, Sāṃkhya view discussed — the
+commentarial layer closest in genre to the fragment.
+
+### Sanskrit (same doctrinal cluster, partial verbal overlap)
+
+**S1. Prajñākaragupta, *Pramāṇavārttikālaṃkāra* — SA_T11_prpva:7954** ★ new this run
+> yadi ca kāryabhedād bhedaḥ kāraṇasya kāryasya kuto bhedaḥ | kāryabhedāntarāc
+> cet | anavasthā | pratibhāsabhedāc cet …
+Reproduces the fragment's exact L3→L4 sequence (kāryabheda regress → *anavasthā*
+→ retreat to *pratibhāsabheda*). Also at SA_T11_pramanavartu:12754.
+https://dharmamitra.org/nexus/db//sa/SA_T11_prpva/text?active_segment=SA_T11_prpva:7954
+
+**S2. *Pramāṇavārttikasvavṛttiṭīkā* — SA_T11_pramanavart3u:3012**
+> na ca pūrvakālāstitve 'dhunā kva vyāpāro 'sannihitatvāt | … kathaṃ
+> pūrvottarakālāstitvayor aikyagrāhakaṃ jñānaṃ pratyakṣaṃ syāt
+— the fragment's L5 argument that re-seeing cannot operate on the past.
+https://dharmamitra.org/nexus/db//sa/SA_T11_pramanavart3u/text?active_segment=SA_T11_pramanavart3u:3012
+
+**S3. Pārthasārathi Miśra, *Śāstradīpikā* — SA_GSP28_sastrdiu:3143** (quoting a Buddhist source)
+> dṛśyatā darśanayogyatā tasyām avasthāyāṃ nāstīti tena rūpeṇābhāvāt dṛśyaṃ
+> nāstīty ucyate
+— continues exactly where the fragment's L1 breaks off; anchor for Lacuna 1.
 https://dharmamitra.org/nexus/db//sa/SA_GSP28_sastrdiu/text?active_segment=SA_GSP28_sastrdiu:3143
 
-**3. Vinītadeva: Nyāyabinduprakaraṇa (*Śiṣyahita*) — BO_T11_D4230:10b-23 through 10b-31 (bo)**
-Definition of *upalabdhilakṣaṇaprāpta* as *upalambhapratyayāntarasampanna svabhāvaviśeṣavat*; the ground-and-jug example. **Primary source text for the reconstruction.**
-https://dharmamitra.org/nexus/db//bo/BO_T11_D4230/text?active_segment=BO_T11_D4230:10b-23
-
-**4. Vinītadeva: Nyāyabinduprakaraṇa (*Śiṣyahita*) — BO_T11_D4230:12a-29 through 12b-9 (bo)**
-Three-fold obstruction (*yul/dus/rang bzhin gyis bskal pa*); the *kapālakāla* argument.
-https://dharmamitra.org/nexus/db//bo/BO_T11_D4230/text?active_segment=BO_T11_D4230:12a-29
-
-**5. Vinītadeva: Nyāyabinduprakaraṇa (*Śiṣyahita*) — BO_T11_D4230:13a-2 through 13b-7 (bo)**
-*Sarvasādhakapratyakṣa* argument; *avikalasmṛtisaṃskāra*; *pūrvatā* inaccessible to *pratyakṣa*; transition to eleven-fold typology.
-https://dharmamitra.org/nexus/db//bo/BO_T11_D4230/text?active_segment=BO_T11_D4230:13a-2
-
-**6. Durvekamiśra: Dharmottarapradīpa — SA_GSP28_durdhpru:9158 (sa)**
-> "dṛśyatvam abhyupagamya dṛśyānupalabdher eva niṣedhaḥ"
-https://dharmamitra.org/nexus/db//sa/SA_GSP28_durdhpru/text?active_segment=SA_GSP28_durdhpru:9158
-
-**7. Dharmakīrti: Santānāntarasiddhi — SA_T11_samtasi:21 (sa)**
-> "pratibhāsabheda eva spandanapūrvako na bhavati"
+**S4. Dharmakīrti, *Santānāntarasiddhi* — SA_T11_samtasi:21**
+> vicchinnāvicchinnapratibhāsakṛto bhedo na jñānayoḥ … pratibhāsabheda eva
 https://dharmamitra.org/nexus/db//sa/SA_T11_samtasi/text?active_segment=SA_T11_samtasi:21
-
-**8. Jayanta Bhaṭṭa: Nyāyamañjarī — SA_GSP29_nyamanu:10673 (sa)**
-> "kapālakāle 'pi sarveṣām iti kā pramā"
-https://dharmamitra.org/nexus/db//sa/SA_GSP29_nyamanu/text?active_segment=SA_GSP29_nyamanu:10673
-
-**9. Tibetan: Pramāṇavārttikaṭīkā — BO_T11_D4225:153a-20 (bo)**
-Tibetan parallel to *keyaṃ dṛśyatā? darśanayogyatā*
-https://dharmamitra.org/nexus/db//bo/BO_T11_D4225/text?active_segment=BO_T11_D4225:153a-20
 
 ---
 
 ## 3. Reconstructed Folio
 
-Attested text in roman. Reconstructed text in ⟨angle brackets⟩. Confidence labels: ◆ Attested · ◇ Probable · ○ Speculative.
+Attested text in roman type; ⟨reconstructions⟩ with confidence label.
+◆ certain (grammar/parallel-determined) | ◇ probable | ○ speculative.
+Each lacuna is sized to its ellipsis count (one ellipsis ≈ one akṣara);
+proposed/budget akṣara counts are given per line.
 
 ```
-…r vvināśaḥ kapālakāle 'nupalambhāt, tadvyavasthānāt, upalambhe tu sadvyavaharāt|
+Line 1  [lacuna: 59 akṣ proposed / 55 budgeted]
+r vvināśaḥ kapālakāle 'nupalambhāt, tadvyavasthānāt, upalambhe tu sadvyavaharāt|
 sā cānuplabdhir mudgarādeḥ prāg api ghaṭādīnām astīti kathaṃ na nāśaḥ|
 atha dṛśyānupalabdher abhāvas tadā tv anupalabdhimātram eva|
 tatra keyaṃ dṛśyatā? darśanayogyatā
-⟨| tadyathā pradeśādyāśrayo darśanayogyatāsvabhāvas tatra ghaṭādīnām adarśanāt
-teṣām abhāvaḥ siddha iti, darśanayogyatāvat i⟩ [◆]
-ty abhāva eva pūrvaṃ ghaṭādeḥ|
+⟨kiṃ svarūpeṇa pratyayāntarasākalyena vā | yadi svarūpeṇa, sā mudgarāt prāg api
+ghaṭāder astīti tadāpi nāśaḥ syāt | atha tasyām avasthāyāṃ sā nāstīti tena
+rūpeṇābhāvo⟩ [◇]
+
+Line 2  [lacuna: 48 / 54]
+vety abhāva eva pūrvaṃ ghaṭādeḥ|
 atha pūrvam anupalabdhir eva kapālakāle 'pi tarhi ghaṭāder anupalabdhir evāstu, nāsattvam|
 tadā kenacid anabhyupagamād ity apy ayuktam, sāṃkhyair abhyupagamāt|
 na cānabhyupagamaḥ pramā|
 atha kapālakāle ghaṭasya kenacid anupalabdhatvād
-⟨ghaṭasyāsattvam āpādayituṃ na śakyam | anyenāpi tad dṛṣṭam iti cet,
-sarvasādhakapratyakṣam api vivādinaṃ prati asiddham — ata⟩ [◇]
+⟨nāśo 'vagamyata iti cet, tad asāram | kenacid anupalabdhatvaṃ hi kutaḥ pramāṇāt
+sidhyati? na pratyakṣāt, paropalambhasyātīndriyatvāt | na hi ya⟩ [◇]
+
+Line 3  [lacuna: 49 / 52]
 d eva mayopalabdhaṃ tad evānyenopalabhyata iti pratyakṣam,
 parasantānānubhūtadarśanasya parokṣatvāt|
 nāpy anumānāt svaparadṛṣṭasya tattvaṃ sidhyati, tasya sāmānyaviṣayatvāt|
 na hy aparadhūmāt pūrvavahnir evātra sidhyati| kintu tajjātīyas|
 tathātrāpi tulya[jātīya]
-⟨eva sidhyate nātmā tādṛśaḥ | ato vyaktivyavasthāpane punaḥ parāpekṣā,
-tasyāṃ ca parāpekṣāyāṃ punar aparā — ity a⟩ [◇]
-navasthā|
-atha pratibhāsabhedāt sukhāder bhedaḥ|
-sa tarhi pratibhāsabhedaḥ svaparasambhavī grāhyākāre pi bhedako stu|
+⟨eva sidhyet | api ca yadi svaparadṛṣṭasya tattvam, sukhāder api tattvaṃ syāt |
+kuto bhedaḥ? kāryabhedāc cet, kāryasya kuto bhedaḥ? kāryabhedāntarāc ced a⟩ [◆]
+
+Line 4  [lacuna: 64 / 59]
+navasthā| atha pratibhāsabhedāt sukhāder bhedaḥ|
+sa tarhi pratibhāsabhedaḥ svaparasambhavī grāhyākāre 'pi bhedako 'stu|
 tathā mayā punar upalabhyate 'sāv iti| na prathamadarśane|
 punarupalambhādivyāpter apratibhāsanād ity ukteḥ|
 tasmāt pūrvadṛṣṭasya ghaṭa
-⟨sya kapālakāle sthāyitā yāpy anumīyate sā smṛtisaṃskāranibandhanā |
-avikalasmṛtisaṃskāravataḥ sādhakapratyakṣaviṣayatvena⟩ [◆]
+⟨sya pūrvadṛṣṭatā na pratyakṣād avasīyate | pūrvadarśanaṃ hi cirātītam, atītaṃ
+ca nendriyajñāne pratibhāsata iti kuto darśanagocaraḥ? kathaṃ tarhi pūrvadṛṣṭo
+'yaṃ ghaṭa ity ava⟩ [◇]
+
+Line 5  [lacuna: 49 / 56; damaged akṣara [ma/sa] read as sa(ṃ)]
 gamyate, punardarśanāt tad evedam adyāpy āsta iti vyavasāyāt|
 naitad api yuktaṃ| punardṛṣṭeḥ pūrvatra vṛtter asiddheḥ|
 sā hi purasthaṃ varttamānakālatayā pratyetuḥ, sphuṭarūpānubhāvāt|
-pūrvvakālāditā tu svagrāhyasya na gantum īśā, tatkālādīnāṃ [sa/ma]
-⟨mupasthitānām api svasaṃvedye 'pratibhāsanāt |
-tadyathā pratyakṣaviṣayīkṛte pīte nī⟩ [◇]
+pūrvvakālāditā tu svagrāhyasya na gantum īśā, tatkālādīnāṃ sa
+⟨ṃpratibhāsasyābhāvāt | yad dhi jñāne sphuṭatayā nodbhāsate na tat tenādhigataṃ
+bhavati | yadi tv anudbhāsamānam apy adhigataṃ syāt, evaṃ sati nī⟩ [○]
+
+Line 6  [lacuna: 48 / 51]
 larūpatayā 'nudbhāsamānaṃ pītaṃ nīlarūpam adhigataṃ bhavati|
-yadi tv apūrvakālādiyogi tādṛśi pratibhāti, tathā sati pūrvadeśakāladaśāṃ dṛśāṃ
-sphuṭatayā saṃpratibhāsanād varttamānatvam eva| na pūrvatā|
-na hi sphuṭam ābhāti punastambhādau pūrvatā|
-athā
-⟨nubhūtapūrvatāgrāhiṇo 'pi pratyabhijñāyāṃ punardṛṣṭau na pūrvatā sphuṭā pratibhāti |
-tato grāhakasya pratyabhijñā⟩ [○]
+yadi tv apūrvakālādiyogi tādṛśi pratibhāti, tathā sati
+pūrvadeśakāladaśāṃ dṛśāṃ sphuṭatayā saṃpratibhāsanād varttamānatvam eva| na pūrvatā|
+na hi sphuṭam ābhāti punastambhādau pūrvatā| athā
+⟨sphuṭaiva pūrvatā stambhādau pratibhātīti cet, evaṃ tarhi nīlaṃ sphuṭam ābhāti
+pūrvatā tv asphuṭeti bhinnāv etau pratibhāsau | tataś cāsphuṭabhāta⟩ [○]
+
+Line 7  [lacuna: 46 / 51]
 sya na tadbhāsinas tattvam|
 na hy ābhāsabhede grāhyaikyaṃ yuktaṃ sarvatra bhedoparatiprasaṃgāt|
-tatra paścāddarśanānumeyāpi sthāyitā yat punar uktam atijaḍaiḥ
-pūrvadṛṣṭatā gṛhyata iti tad atipāpīyaḥ,
+tatra paścāddarśanānumeyāpi sthāyitā
+yat punar uktam atijaḍaiḥ pūrvadṛṣṭatā gṛhyata iti tad atipāpīyaḥ,
 pūrvadṛśaś cyutāyā jñānāntarāvedyatvenāpratibhāsane tatkarmmatā
-⟨ity abhyupagame pūrvajñānakartṛtvam aṅgīkurvataḥ
-saṃtānātmānam iva kalpayataḥ tīrthikānāṃ sam⟩ [◇]
+⟨kuta eva? na hi yad apratibhāsamānaṃ tad grāhyaṃ nāma | tasmāt pūrvadṛṣṭatā na
+gṛhyate, kiṃ tarhi smṛtisahakāriṇā manasā samāro⟩ [○]
+
+Line 8  [lacuna: 52 / 51]
 pyādhyānas tīrthyā yuktiḥ| na vājvalanair bhasmīkāryākṛtibhiḥ|
-yadi ca pūrvadarśanabhānuṃ nīlaṃ pratyakṣeneti tathā sati bhinnam api pūrvadṛṣṭaṃ tatra bhāsatām|
-atha bhedād eva na bhāsataḥ abhinnaṃ tat pūrvaṃ dṛṣṭaṃ bhāti|
-nanu kiṃ bhinnatvāt|
+yadi ca pūrvadarśanabhānuṃ nīlaṃ pratyakṣeneti
+tathā sati bhinnam api pūrvadṛṣṭaṃ tatra bhāsatām|
+atha bhedād eva na bhāsataḥ abhinnaṃ tat pūrvvaṃ dṛṣṭaṃ bhāti| nanu kiṃ bhinnatvāt|
 pūrvadṛṣṭe ghaṭādau na pratyakṣa
-⟨m asti nāpi tādṛśam anumānam | ata eva darśanayogyatāvato 'bhāvaviṣaye
-svabhāvānupalambhe sati — svabhāvānupalabdhir iti |
-sā ca prayogabhedāt tāvad ekādaśadhā⟩ [◆]
+⟨ṃ pramāṇam, atītasya darśanasya tatrāpratibhāsanāt | nāpy anumānam,
+liṅgābhāvāt sāmānyaviṣayatvāc ca | tasmāt pūrvadṛṣṭatāyāṃ na kiṃcit pramāṇam
+asti⟩ [◇]
 ```
 
-◆ Attested (Tibetan D4230 verbatim back-translation): L1, L4, L8
-◇ Probable: L2, L3, L5, L7
-○ Speculative: L6
+Line-boundary junctions all yield valid sandhi and syntax:
+…abhāvo **vā** + **iti** → "vety" (L1→2); "na hi **ya**" + "**d** eva" (L2→3);
+"…ced **a**" + "**navasthā**" (L3→4); "ity **ava**" + "**gamyate**" (L4→5);
+"sati **nī**" + "**larūpatayā**" (L5→6); "asphuṭabhāta" + "**sya**" (L6→7);
+"samāro" + "**pyādhyānas**" = *samāropya + ādhyānaḥ* (L7→8).
 
 ---
 
 ## 4. Translation
 
-The destruction [of the pot] at the sherd-moment (*kapālakāla*) is established by non-apprehension (*anupalambha*), for it is based on the determination of that; whereas by apprehension, [existence] is established by the convention of existence (*sadvyavahāra*). Yet since this non-apprehension exists even before the hammer is raised — prior to the pot and so on being struck — how does destruction [follow]? If one argues that [non-existence] is established by the mere non-apprehension of what is perceptible (*dṛśyānupalabdhi*, non-apprehension of the perceptible), then at that moment it is mere non-apprehension. But what is this perceptibility (*dṛśyatā*)? It is the capacity for being seen (*darśanayogyatā*), [such that wherever the region etc. has as its nature the capacity-to-appear-equally, and the pot etc. is not seen there, the absence of the pot is established — such is what is meant by 'having the capacity to be seen'].
+*(DharmaMitra cat-translate, claude. Reconstructed portions in [square brackets].)*
 
-[Taking *darśanayogyatā* in] this sense, [there was already] non-existence of the pot etc. from the very beginning. [Opponent:] But if non-apprehension applies from the very beginning, then let there be mere non-apprehension of the pot even at the sherd-moment — not non-existence. [Response:] To say that it is not accepted by anyone is also improper, for it is accepted by the Sāṃkhya. And non-acceptance is not a proof (*pramāṇa*). [Opponent:] But because the pot is not apprehended by anyone at the sherd-moment, [its non-existence is established.] [Response: One cannot establish the non-existence of the pot on that basis. Even if one says "another has also seen it," all proponents' perception (*sarvasādhakapratyakṣa*) is unestablished for the opponent.]
+Destruction of the jar is established at the time of the potsherds through
+non-apprehension (*anupalabdhi*), for this is how it is determined; whereas, in
+the case of apprehension, there is usage as existent. If this non-apprehension
+of the jar and the like exists even before the [striking by a] hammer, why then
+is there no destruction [at that time]?
 
-[One cannot argue] that "the very object I have apprehended is apprehended by another" via direct perception (*pratyakṣa*), since the experience of another mental continuum (*santānāntara*) is indirect (*parokṣa*). Nor is the nature of what is seen by oneself and others established by inference (*anumāna*), because that has universals (*sāmānya*) as its object. Indeed, it is not the prior fire itself that is established here from the other's smoke, but only something of that same class. And in this case too [only] a [similar entity is established — not the same individual. Therefore, in establishing individuation, there is resort to something other, and in that resort to the other, resort to yet another — hence an infinite] regress.
+If you suggest that destruction is simply the absence due to the
+non-apprehension of what is perceptible, then at that time there is only mere
+non-apprehension. But what is this "fitness to be seen" (*dṛśyatā*)? [Is it by
+its own nature or by the completeness of other conditions? If it is by its own
+nature, then since that [fitness] exists in the jar even before the hammer,
+there should be destruction even then. If you argue that in that state it does
+not exist, then because of that form, the absence] was already there for the
+jar beforehand.
 
-[Opponent:] But given the difference in appearances (*pratibhāsabheda*), there is a difference in pleasure etc. [Response:] Then let that difference in appearance, which arises from both oneself and others, be a differentiator even in the apprehended form (*grāhyākāra*). [Opponent:] "This is what I am re-perceiving." [Response:] Not in the first perception. As was stated: because the pervasion of re-apprehension (*punarupalambha*) etc. does not appear [in the first perception]. Therefore the persistence of a previously seen pot [at the sherd-moment, even if inferred, is grounded in the seed of non-confused memory (*avikalasmṛtisaṃskāra*); it is known as the object-domain of the proponent's perception].
+If you claim that, in that case, the non-apprehension which existed beforehand
+should also persist at the time of the potsherds, then let it be merely the
+non-apprehension of the jar, not its non-existence. To say that "at that time
+it is not accepted by anyone" is also unreasonable, as it is accepted by the
+Sāṃkhyas. Moreover, non-acceptance is not a valid means of knowledge (*pramā*).
 
-[This persistence] is known from re-seeing, through the determination "this very thing is still present today." This is also not valid, because the operation [of re-seeing] in the prior instance is not established. Indeed, one who cognizes [the object] as presently before them does so because of the experience of a vivid form (*sphuṭarūpa*). But anteriority (*pūrvatā*) is incapable of reaching what is to be grasped [as its own content], since the temporal factors [even when they are present do not appear in self-awareness (*svasaṃvit*). Just as when yellow, made the object of perception, the blue that is not manifesting as yellow is not comprehended as blue].
+If you argue that destruction is understood because the jar is not apprehended
+by anyone at the time of the potsherds, [this is baseless. From what valid
+source of knowledge is it established that it is not apprehended by anyone? It
+is not through perception, since the apprehension of another is supersensible
+(*atīndriya*). For it is not] perceived that "exactly that which is apprehended
+by me is apprehended by another," because the experience of another's mental
+continuum (*parasantāna*) is inaccessible (*parokṣa*). Nor is the reality of
+what is seen by oneself and another established by inference, as inference
+deals only with universals (*sāmānyaviṣayatvāt*). For instance, the prior fire
+is not established here from a different smoke; rather, [it is established as]
+one of the same type. Likewise, here too only one of the same type [could be
+established. Furthermore, if the reality of what is seen by oneself and another
+were [identical], then the reality of happiness and the like would also be
+[identical]. Where is the distinction? If you say it is due to a distinction in
+effect, then from what does the distinction in effect arise? If it is due to
+yet another distinction in effect, there is] infinite regress (*anavasthā*).
 
-[Continuing:] When [an object] appears as associated with a previous time etc. for the first time, then since the previous state of place, time, and condition appears vividly to the eye, it is just presentness (*varttamānatva*) — not anteriority (*pūrvatā*). Indeed, anteriority does not appear vividly in the case of a repeated pillar. [Even in recognition (*pratyabhijñā*), even for one who grasps previously experienced anteriority, upon re-seeing the anteriority does not appear vividly; therefore for the cognizer of recognition,]
+If you argue that happiness and the like are distinct because of a distinction
+in appearance, then let that distinction in appearance — possible both for
+oneself and for another — be the differentiator for the object-aspect
+(*grāhyākāra*) as well. [Regarding the claim] that "this [object] is
+apprehended again by me," this does not hold at the initial moment of seeing.
+As has been said, there is no appearance of the concomitance with repeated
+apprehension and so forth. Therefore, the ["previously-seen-ness"
+(*pūrvadṛṣṭatā*) of a jar that was seen before is not determined by perception.
+For the prior seeing is long past, and what is past does not appear in sensory
+cognition; so how could it be the object of vision? How then is it] understood
+[that "this is the jar seen before"]? It is through the determination that
+"this is that same [thing], still existing today," based on seeing it again.
 
-[the result] is not the reality of that which manifests in this way. It is not proper to posit unity of the apprehended object (*grāhyaikya*) when there is a difference in appearance, as this would lead to the cessation of all distinctions. Therefore, even the persistence inferred from subsequent vision — which the dull-witted claim is "the grasping of previous visibility (*pūrvadṛṣṭatā*)" — is most pernicious; since the previous vision has ceased and is not cognizable by another cognition, [to accept that its object-status (*karmmatā*) can be established amounts to positing the authorship of prior cognition, imagining a self of the stream, like the Tīrthika position — so the]
+This too is not reasonable, as the operation of a repeated seeing upon the past
+is unproven. For one who is currently perceiving [the object] present before
+them cognizes it as having the nature of the present time, due to the
+experience of a clear form. But "prior-time-ness" (*pūrvakālāditā*) is
+incapable of reaching what is to be grasped, because [there is no appearance of
+that time and the rest. For whatever does not shine in cognition with clarity
+is not attained by it. If, however, it were attained even without appearing,
+then] a yellow [object] not appearing as having a blue-form would be attained
+as having a blue-form. If [an object] connected with a prior time and the like
+appears in such a way, then, because the prior place, time, and state appear
+with clarity to the viewer, it would be [perceived as] present, not as prior.
+For "prior-ness" does not shine clearly in the re-seen pillar or the like.
 
-argument of the Tīrthikas is a [mere] meditation. It is not established by the shapes destined to be reduced to ash by fires. And if one were to say that the blue is apprehended by direct perception as the object of a previous vision, then even a different previously-seen object should appear there. If one argues that it does not appear precisely because of the difference, and therefore the previously seen identical [object] appears — is it not because it is different? With respect to previously seen pots etc., [there is no direct perception (*pratyakṣa*), nor any inference of that sort. It is precisely for this reason that, when there is non-apprehension of the own-nature (*svabhāvānupalabdhi*) with respect to the domain of absence of what has the capacity to be seen — this is *svabhāvānupalabdhi*. And it, by difference of application (*prayogabheda*), is of eleven kinds.]
+[If you claim that "prior-ness" appears in the pillar and the like merely
+unclearly, then the blue shines clearly while the "prior-ness" is unclear, and
+thus these two are distinct appearances. And so for what appears unclearly]
+there is no identity with what appears as that [vivid object]. For it is not
+reasonable that there is identity of the object when there is a distinction of
+appearance, as this would result in the cessation of all distinctions. In that
+case, even if persistence (*sthāyitā*) is inferred from a later seeing — the
+claim made by the extremely dull-witted (*atijaḍa*) that "previously-seen-ness
+is grasped" is utterly fallacious (*atipāpīyaḥ*): since the prior sight has
+perished and does not appear, being unknowable by another cognition, how could
+there be objecthood for it? [For what does not appear cannot be called an
+object of grasping. Therefore "previously-seen-ness" is not grasped; rather it
+is superimposed by the mind aided by memory, and the subsequent] rumination is
+the reasoning of the *tīrthikas* — not [made true] by flames with shapes that
+can be reduced to ash. And if the blue that bears the light of the prior seeing
+were [grasped] by perception, then even a different previously-seen [object]
+should appear there. If you argue that it does not appear precisely because of
+the difference, then [only] the non-different previously-seen appears? But what
+[does it matter] that it is different? For a jar and the like that were
+previously seen, perception is no [valid means of knowledge, because the past
+seeing does not appear there. Nor is inference, due to the absence of a sign
+(*liṅga*) and because it has universals as its object. Thus there is no valid
+means of knowledge at all for "previously-seen-ness."]
 
 ---
 
 ## 5. Lacuna Notes
 
-### Lacuna 1 — ◆ Attested
-**Position:** Line 1, after `darśanayogyatā`
-**Estimated akṣaras:** ~52
-**Tibetan basis:** D4230:10b-23 through 10b-25
-**Tibetan:** `འདི་སྐད་དུ་ཕྱོགས་ལ་སོགས་པ་ནི་སྣང་བ་མཚུངས་པར་རུང་བའི་ངོ་བོ་བུམ་པ་ལ་སོགས་པ་ནི་མི་སྣང་བའི་ཕྱིར། བུམ་པས་སྟོང་པས་ས་གཞི་སྟོང་པའི་ཕྱིར་རོ།`
-**Reconstruction:** `| tadyathā pradeśādyāśrayo darśanayogyatāsvabhāvas tatra ghaṭādīnām adarśanāt teṣām abhāvaḥ siddha iti, darśanayogyatāvat i`
-**Rationale:** The Tibetan elaborates the *darśanayogyatā* definition with the ground-and-jug example. The reconstructed `iti` connects forward to `ty abhāva eva` at line 2. Verbatim Sanskrit confirmed by Pārthasārathi Miśra's *Śāstradīpikā* (SA_GSP28_sastrdiu:3143): `dṛśyatā darśanayogyatā tasyāmavasthāyāṃ nāstīti`.
+| # | Line | Akṣ (prop./budget) | Conf. | Primary basis |
+|---|------|--------------------|-------|---------------|
+| 1 | 1 | 59 / 55 | ◇ | Śāstradīpikā quotation (S3) continues the broken-off definition |
+| 2 | 2 | 48 / 54 | ◇ | Grammar-determined negation feeding L3; D4253 250b–251a (T2) |
+| 3 | 3 | 49 / 52 | ◆ | Verbatim regress in Prajñākaragupta (S1, prpva:7954 + pramanavartu:12754) |
+| 4 | 4 | 64 / 59 | ◇ | Question–answer frame forced by L5; S2; T3 |
+| 5 | 5 | 49 / 56 | ○ | Folio-internal idiom (saṃpratibhāsa, anudbhāsamāna, adhigata) |
+| 6 | 6 | 48 / 51 | ○ | Only available opponent move (asphuṭa-pratibhāsa); feeds L7 ābhāsabheda |
+| 7 | 7 | 46 / 51 | ○ | tatkarmatā reductio; T3 (recognition fuses, does not perceive); samāropya reading of L8 "pyādhyānas" |
+| 8 | 8 | 52 / 51 | ◇ | Folio's own two-pramāṇa frame (L3 sāmānyaviṣayatvāt); folio-final |
+
+### Lacuna 1 — after *darśanayogyatā* (L1) [◇] 59/55 akṣ
+⟨kiṃ svarūpeṇa pratyayāntarasākalyena vā | yadi svarūpeṇa, sā mudgarāt prāg api ghaṭāder astīti tadāpi nāśaḥ syāt | atha tasyām avasthāyāṃ sā nāstīti tena rūpeṇābhāvo⟩
+Must end in a nominative before *vā* so that L2 "vety" (= *vā + iti*) yields
+"…abhāvo vā — ity abhāva eva pūrvaṃ ghaṭādeḥ". The second horn is anchored
+verbatim in the Śāstradīpikā quotation of a Buddhist source (S3): "dṛśyatā
+darśanayogyatā **tasyām avasthāyāṃ nāstīti tena rūpeṇābhāvāt**…", recast from
+ablative to the nominative the sandhi requires. The first horn reprises the
+folio's own opening objection.
+
+### Lacuna 2 — after *kenacid anupalabdhatvād* (L2) [◇] 48/54 akṣ
+⟨nāśo 'vagamyata iti cet, tad asāram | kenacid anupalabdhatvaṃ hi kutaḥ pramāṇāt sidhyati? na pratyakṣāt, paropalambhasyātīndriyatvāt | na hi ya⟩
+The tail "na pratyakṣāt … na hi ya-" is grammar-determined: L3's "…iti
+pratyakṣam, parasantānānubhūtadarśanasya parokṣatvāt" presupposes a preceding
+negation and the relative *yad*. Argument paralleled by D4253 250b–251a (T2).
+
+### Lacuna 3 — after *tulya[jātīya]* (L3) [◆] 49/52 akṣ
+⟨eva sidhyet | api ca yadi svaparadṛṣṭasya tattvam, sukhāder api tattvaṃ syāt | kuto bhedaḥ? kāryabhedāc cet, kāryasya kuto bhedaḥ? kāryabhedāntarāc ced a⟩
+The regress clause is attested verbatim in Prajñākaragupta (S1): "kāryasya kuto
+bhedaḥ | kāryabhedāntarāc cet | anavasthā | pratibhāsabhedāc cet" — exactly the
+fragment's L3-end → L4-start sequence (…a]navasthā | atha pratibhāsabhedāt
+sukhāder bhedaḥ). Validation search returned two exact hits; upgraded to ◆.
+
+### Lacuna 4 — after *pūrvadṛṣṭasya ghaṭa* (L4) [◇] 64/59 akṣ
+⟨sya pūrvadṛṣṭatā na pratyakṣād avasīyate | pūrvadarśanaṃ hi cirātītam, atītaṃ ca nendriyajñāne pratibhāsata iti kuto darśanagocaraḥ? kathaṃ tarhi pūrvadṛṣṭo 'yaṃ ghaṭa ity ava⟩
+The question–answer frame is forced by L5 ("…**gamyate**, punardarśanāt … iti
+vyavasāyāt | **naitad api yuktam**"). Doctrine: S2 and T3.
+
+### Lacuna 5 — after *tatkālādīnāṃ sa* (L5) [○] 49/56 akṣ
+⟨ṃpratibhāsasyābhāvāt | yad dhi jñāne sphuṭatayā nodbhāsate na tat tenādhigataṃ bhavati | yadi tv anudbhāsamānam apy adhigataṃ syāt, evaṃ sati nī⟩
+The damaged akṣara [ma/sa] is read **sa(ṃ)** on the strength of L6's own
+"saṃpratibhāsanād". Every content word is recycled from the folio's L6; the
+counterfactual is required by L6's reductio (yellow grasped as blue). The
+reading **nī**[larūpatayā] (for the older guess mū-) makes the reductio exact:
+"a yellow not appearing as blue would be apprehended as blue."
+
+### Lacuna 6 — after *athā* (L6) [○] 48/51 akṣ
+⟨sphuṭaiva pūrvatā stambhādau pratibhātīti cet, evaṃ tarhi nīlaṃ sphuṭam ābhāti pūrvatā tv asphuṭeti bhinnāv etau pratibhāsau | tataś cāsphuṭabhāta⟩
+Sandhi-determined frame: opens with a- (athā- = atha + a-), closes in an a-stem
+genitive whose -sya begins L7. L7's "na hy ābhāsabhede grāhyaikyaṃ yuktam"
+presupposes that an appearance-difference (vivid nīla vs non-vivid pūrvatā) has
+just been established.
+
+### Lacuna 7 — after *tatkarmmatā* (L7) [○] 46/51 akṣ
+⟨kuta eva? na hi yad apratibhāsamānaṃ tad grāhyaṃ nāma | tasmāt pūrvadṛṣṭatā na gṛhyate, kiṃ tarhi smṛtisahakāriṇā manasā samāro⟩
+Reads L8's "pyādhyānas" as *samāro)py ādhyānaḥ* — "rumination after [mental]
+superimposition" — giving the tīrthya-yukti dismissal its referent. The positive
+account (memory-aided superimposition, not perception) matches T3.
+
+### Lacuna 8 — folio-final (L8) [◇] 52/51 akṣ
+⟨ṃ pramāṇam, atītasya darśanasya tatrāpratibhāsanāt | nāpy anumānam, liṅgābhāvāt sāmānyaviṣayatvāc ca | tasmāt pūrvadṛṣṭatāyāṃ na kiṃcit pramāṇam asti⟩
+The two-pramāṇa denial echoes the folio's own L3 ("nāpy anumānāt …
+sāmānyaviṣayatvāt") and L7 ("apratibhāsane"). Folio-final, so the run-on into
+the next folio is unverifiable.
 
 ---
 
-### Lacuna 2 — ◇ Probable
-**Position:** Line 2, after `kapālakāle ghaṭasya kenacid anupalabdhatvād`
-**Estimated akṣaras:** ~50
-**Tibetan basis:** D4230:13a-2 through 13b-2
-**Tibetan:** `སྒྲུབ་པ་པོའི་མངོན་སུམ་འདས་པ་དང་ད་ལྟར་གྱི་ལོག་པ་ནི་མ་ཡིན་པ་ལ་བརྟེན་པའི་ཕྱིར། ... སྒྲུབ་པ་པོ་ཐམས་ཅད་ཀྱི་མངོན་སུམ་ལོག་པ་ནི་ཕྱིར་རྒོལ་བ་ལ་མི་འགྲུབ་བོ།`
-**Reconstruction:** `ghaṭasyāsattvam āpādayituṃ na śakyam | anyenāpi tad dṛṣṭam iti cet, sarvasādhakapratyakṣam api vivādinaṃ prati asiddham — ata`
-**Rationale:** Tibetan `sgrub pa po thams cad kyi mngon sum log pa ni phyir rgol ba la mi 'grub bo` = `sarvasādhakapratyakṣam api vivādinaṃ prati asiddham`. The technical compound `sarvasādhakapratyakṣa` is specific to Dharmottara and is confirmed by the Tibetan.
-
----
-
-### Lacuna 3 — ◇ Probable
-**Position:** Line 3, after `tulya[jātīya]`
-**Estimated akṣaras:** ~42–50
-**Tibetan basis:** D4230:13a-9 through 13a-17 (transition zone)
-**Reconstruction:** `eva sidhyate nātmā tādṛśaḥ | ato vyaktivyavasthāpane punaḥ parāpekṣā, tasyāṃ ca parāpekṣāyāṃ punar aparā — ity a`
-**Rationale:** The *tathātrāpi* in the surviving text draws a parallel to the fire-smoke case. Just as only `tajjātīyas` and not `pūrvavanir eva` is established, only a *jātīya* (same-kind) entity is established — not the identical individual. The *anavasthā* (regress) at the start of line 4 closes this argument.
-
----
-
-### Lacuna 4 — ◆ Attested
-**Position:** Line 4, after `pūrvadṛṣṭasya ghaṭa`
-**Estimated akṣaras:** ~51
-**Tibetan basis:** D4230:12b-13 through 13a-5
-**Tibetan:** `མི་རྨོངས་པར་དྲན་པའི་འདུ་བྱེད་བུམ་པ་ལ་སོགས་པ་གང་ལ་ཡོད་པ་དེ་ལ་དེ་སྐད་ཅེས་བརྗོད་དོ།`
-**Reconstruction:** `sya kapālakāle sthāyitā yāpy anumīyate sā smṛtisaṃskāranibandhanā | avikalasmṛtisaṃskāravataḥ sādhakapratyakṣaviṣayatvena`
-**Rationale:** Tibetan `mi rmongs par dran pa'i 'du byed` = `avikalasmṛtisaṃskāra` — this compound is specific to Dharmottara and appears in no other author's work in this form. Its presence in the Tibetan is the strongest individual confirmation of D4230 as the source.
-
----
-
-### Lacuna 5 — ◇ Probable
-**Position:** Line 5, after `tatkālādīnāṃ [sa/ma]`
-**Estimated akṣaras:** ~44
-**Tibetan basis:** D4230:13a-24 through 13a-27
-**Tibetan:** `གཞན་དུ་ན་ནི་སྟོང་པའི་ངོ་བོའི་ཕྱོགས་ལ་སོགས་པ་མི་དྲན་ན། མི་དམིགས་པ་ཉིད་འགྲུབ་པར་མི་འགྱུར་རོ།`
-**Reconstruction:** `mupasthitānām api svasaṃvedye 'pratibhāsanāt | tadyathā pratyakṣaviṣayīkṛte pīte nī`
-**Scribal note:** `[sa/ma]` — the reading `sa` supports `[sa]mupasthitānām`; `ma` would suit `[ma]dhyāropita-` or `[ma]naso 'gocara-`. Neither is certain; `sa` is slightly preferable on akṣara count.
-
----
-
-### Lacuna 6 — ○ Speculative
-**Position:** Line 6, after `athā`
-**Estimated akṣaras:** ~50
-**Tibetan basis:** No direct segment identified; reconstructed from argument context
-**Reconstruction:** `nubhūtapūrvatāgrāhiṇo 'pi pratyabhijñāyāṃ punardṛṣṭau na pūrvatā sphuṭā pratibhāti | tato grāhakasya pratyabhijñā`
-**Rationale:** The surviving text denies that *pūrvatā* appears vividly (*sphuṭam*) even in the repeated-pillar case. The `athā` opens a new condition: "even for one who grasps previously experienced anteriority." The continuation closes into `sya na tadbhāsinas tattvam` (line 7). No Tibetan segment directly retrieved for this zone.
-
----
-
-### Lacuna 7 — ◇ Probable
-**Position:** Line 7, after `tatkarmmatā`
-**Estimated akṣaras:** ~50
-**Tibetan basis:** D4230:13b-4 through 13b-9
-**Tibetan:** `དྲན་པ་མ་ཉམས་པའི་ས་བོན་སྒྲུབ་པ་པོའི་མངོན་སུམ་འདས་པ་དང་། ད་ལྟར་བྱུང་བའི་ཡུལ་གྱི་དངོས་པོ་ལོག་པ་གང་ཡིན་པ་དེ་ཉིད་ཀྱིས་དངོས་པོ་མེད་པ་ངེས་པར་བྱེད་ནུས་ཀྱི།`
-**Reconstruction:** `ity abhyupagame pūrvajñānakartṛtvam aṅgīkurvataḥ saṃtānātmānam iva kalpayataḥ tīrthikānāṃ sam`
-**Rationale:** The Buddhist charges that accepting the object-status (*karmmatā*) of a past cognition amounts to imagining a stream-self — the Tīrthika move. `pyādhyānas tīrthyā yuktiḥ` at line 8 start confirms this reading.
-
----
-
-### Lacuna 8 — ◆ Attested
-**Position:** Line 8, after `na pratyakṣa`
-**Estimated akṣaras:** ~53
-**Tibetan basis:** D4230:13b-9 through 13b-24 (transition to eleven-fold typology)
-**Tibetan:** `སྦྱོར་བའི་བྱེ་བྲག་གིས་རྣམ་པ་བཅུ་གཅིག་སྟེ། ... རང་བཞིན་མི་དམིགས་པ་ནི། རང་བཞིན་གྱི་དངོས་པོ་རང་གི་ངོ་བོ་མི་དམིགས་པའོ།`
-**Reconstruction:** `m asti nāpi tādṛśam anumānam | ata eva darśanayogyatāvato 'bhāvaviṣaye svabhāvānupalambhe sati — svabhāvānupalabdhir iti | sā ca prayogabhedāt tāvad ekādaśadhā`
-**Rationale:** The Tibetan at 13b-9 through 13b-13 gives `sbyor ba'i bye brag gis rnam pa bcu gcig` = `prayogabhedāt ekādaśadhā` (eleven types by difference of application). This is a precise textual marker: the folio ends just as the enumeration begins, and L8 provides the closing transition sentence. ◆ because the Tibetan maps directly to a reconstructable Sanskrit formula.
-
----
-
-## 6. Philological Notes
-
-**On the identification (Vinītadeva's *Nyāyabinduprakaraṇa*):**
-The identification rests on three convergent lines of evidence: (1) the argument sequence in D4230 matches the fragment exactly across folios 10b–13b in a single continuous passage; (2) the *avikalasmṛtisaṃskāra* compound (L4) and the *sarvasādhakapratyakṣa* formula (L2) are both confirmed in D4230 at folios 12b–13b; (3) Pārthasārathi Miśra's verbatim quotation of the *darśanayogyatā* definition (SA_GSP28_sastrdiu:3143) matches the D4230 text precisely — Pārthasārathi is quoting Vinītadeva.
-
-Dharmottara's *Nyāyabinduṭīkā* (D4231) was checked and ruled out: although it contains both diagnostic compounds (*avikalasmṛtisaṃskāra* at 54a; *sarvasādhakapratyakṣa* at 53b), the four thematic clusters are distributed across folios 41a–67b in a different order from the fragment. Note that neither compound is exclusive to Dharmottara — both appear in Vinītadeva as well. The D4230/D4231 confusion in the DharmaMitra metadata (both labelled "nyāyabinduṭīkā") was resolved by the D4230 colophon (folio 36b-2), which names Vinītadeva explicitly.
-
-The Sanskrit of this section of the *Nyāyabinduprakaraṇa* is unedited; the DharmaMitra corpus contains no Sanskrit parallels for the most distinctive phrases (`svaparasambhavī grāhyākāre bhedako`, `paścāddarśanānumeyāpi sthāyitā`), consistent with an unedited text.
-
-**On the scribal fragment head:** The fragment begins `r vvināśaḥ` — the initial `r` is the end of the preceding word, almost certainly `niranvayavināśaḥ` (*destruction without remainder*) or `evaṃ vināśaḥ` (*thus destruction*). The *niranvayavināśa* reading would place this folio within the sustained treatment of momentary destruction in the NBṭ's inference chapter.
-
-**On L8 as a folio boundary:** L8's reconstruction ends with `ekādaśadhā` — the introduction of the eleven-fold typology of *anupalabdhi*. Dharmakīrti's root text (*Nyāyabindu* III.22–32) lists eleven types. This means the fragment closes precisely at the end of the introduction to that list, and the following folio(s) would contain the enumeration. If the manuscript is multi-folio, the next folio should begin with `svabhāvānupalabdhi` (the first type).
+*Lacunae processed: 8. Confidence: ◆ 1 / ◇ 4 / ○ 3. All proposals within ±15%
+of the akṣara budgets (51–59 per line). Searches: local Tengyur e-texts
+(~/Documents/Tibetan/Tibetan_e_text) + DharmaMitra /primary/. Translation:
+DharmaMitra cat-translate.*
