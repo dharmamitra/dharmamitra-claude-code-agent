@@ -112,10 +112,13 @@ https://dharmamitra.org/nexus/db//sa/SA_T11_prpva/text?active_segment=SA_T11_prp
 — the fragment's L5 argument that re-seeing cannot operate on the past.
 https://dharmamitra.org/nexus/db//sa/SA_T11_pramanavart3u/text?active_segment=SA_T11_pramanavart3u:3012
 
-**S3. Pārthasārathi Miśra, *Śāstradīpikā* — SA_GSP28_sastrdiu:3143** (quoting a Buddhist source)
+**S3. Pārthasārathi Miśra, *Śāstradīpikā* — SA_GSP28_sastrdiu:3143** (Buddhist formula adapted in a Mīmāṃsā mokṣa context)
 > dṛśyatā darśanayogyatā tasyām avasthāyāṃ nāstīti tena rūpeṇābhāvāt dṛśyaṃ
 > nāstīty ucyate
-— continues exactly where the fragment's L1 breaks off; anchor for Lacuna 1.
+— the wording in which the Buddhist dṛśyānupalabdhi definition circulated;
+anchor for Lacuna 1. NB: not a quotation of this debate — Pārthasārathi
+deploys the formula in his suṣupti/mokṣa exegesis (see
+output/reports/parthasarathi-sastradipika-parallel.md).
 https://dharmamitra.org/nexus/db//sa/SA_GSP28_sastrdiu/text?active_segment=SA_GSP28_sastrdiu:3143
 
 **S4. Dharmakīrti, *Santānāntarasiddhi* — SA_T11_samtasi:21**
