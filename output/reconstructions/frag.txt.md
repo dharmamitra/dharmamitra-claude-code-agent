@@ -1,9 +1,14 @@
 # Folio Reconstruction: frag.txt (Tibetan-parallel pass, akṣara-constrained)
 
-**Run date:** 2026-06-11. Supersedes the 2026-06-09 report. Two things are new:
-(1) lacuna sizes are now respected — one ellipsis in the source ≈ one lost akṣara
+**Run date:** 2026-06-11; revised 2026-06-13 after the local-corpus extension.
+Supersedes the 2026-06-09 report. New in this version:
+(1) lacuna sizes are respected — one ellipsis in the source ≈ one lost akṣara
 (budgets 51–59 akṣaras per line); (2) the Tibetan evidence has been re-examined
-from scratch, and the earlier identification is **retracted**.
+from scratch, and the earlier identification is **retracted**; (3) the
+fragment's argument chain has been found, expanded, in **Abhayadevasūri's
+Tattvabodhavidhāyinī** (Jaina, 11th c.) — see witnesses J1–J3 below and
+`output/reports/frag-jaina-parallels.md` — allowing Lacunae 7–8 to be rebuilt
+on independent testimony and Lacunae 5–6 to be upgraded.
 
 ---
 
@@ -125,6 +130,50 @@ https://dharmamitra.org/nexus/db//sa/SA_GSP28_sastrdiu/text?active_segment=SA_GS
 > vicchinnāvicchinnapratibhāsakṛto bhedo na jñānayoḥ … pratibhāsabheda eva
 https://dharmamitra.org/nexus/db//sa/SA_T11_samtasi/text?active_segment=SA_T11_samtasi:21
 
+### Jaina dialectical witnesses (local corpus, found 2026-06-13) ★ closest of all
+
+Abhayadevasūri's *Tattvabodhavidhāyinī* (TBV) on Siddhasena's *Sammatitarka*
+(local: `1_sanskr/4_rellit/jaina/siddhasena_sammatitarka.xml`) transmits the
+fragment's L4–L8 argument chain in expanded prose, partly flagged "**ity
+ukteḥ**" as a (Buddhist) source-statement, and shares the fragment's
+hyper-rare diction (*pūrvadṛś/pūrvadṛg* ×22, *pūrvakālādi(yogitā)*,
+*bhedoparati*, *tatkarmatā*, *kapālakāla*). Full analysis:
+`output/reports/frag-jaina-parallels.md`.
+
+**J1. TBV, pratyabhijñā refutation (e-text lines ~16350–16400):**
+> …pūrvadarśanam apetatvād asat kathaṃ varttamānadarśane pratibhāti?
+> tadapratibhāse ca tadgrāhyatāpi **pracyutatvād** na pratibhāti … na ca
+> pūrvadṛṣṭatā nābhāti pūrvadṛṣṭarūpaṃ cābhātīti … **na hi
+> nīlatā'pratipattau nīlo 'rtho 'dhigato bhavati** | svavedyatayā ca
+> pratibhāsamānaḥ svavedya eva **nānyavedyaḥ** … na ca **pūrvadṛśo 'pāye
+> tatkarmatā** arthasya **pracyutā** iti na bhāti tadgocaraḥ …
+> apratibhāsanād anyathātiprasaṅga **ity ukteḥ** | … **na ca bhinnaṃ
+> pūrvadṛgavagataṃ nāvabhāti, abhinnaṃ tu** tatpratibhāsaviṣayo 'vabhāsata
+> eva … pūrvadṛṣṭatvād eva tasya na tatra pratibhāsaḥ, **tac cābhinne 'pi
+> samānam** | … na cābhinnasya pūrvadṛggocarasya **sannihitatvāt**
+> pratibhāsaḥ … tatsannidher evāsiddheḥ | na ca samprati darśanāt
+> tatsannidhisiddhiḥ, **itaretarāśrayadoṣāt**
+= the fragment's L7–L8 sequence (pūrvadṛśaś cyutāyā … tatkarmmatā; bhinnam
+api pūrvadṛṣṭaṃ tatra bhāsatām; nanu kiṃ bhinnatvāt), plus its continuation.
+
+**J2. TBV (lines ~14108–14140):**
+> darśanaṃ **sphuṭapratibhāsaṃ** vartamānārthaviṣayatayāvabhāti, smaraṇam apy
+> **aspaṣṭapratibhāsaṃ** bibhrāṇaṃ parokṣollekhavad ābhāti — tat katham ekaḥ
+> pratibhāsaḥ? … anyathā sarvatra **bhedoparatiprasaktiḥ** … tatrāpi
+> **pūrvadṛg adhunā nāstīti katham asati sā grāhikā** … atha **tadevedam** iti
+> darśanasamānādhikaraṇatayā smṛtyutpatteḥ…
+= the fragment's L4–L7 material (sphuṭa vs asphuṭa appearances; bhedoparati;
+the perished prior seeing; tad evedam).
+
+**J3. TBV (lines ~16638–16640 and ~19176–19185):**
+> vartamānaiva **pūrvakālādiyogatā** bhavet **nātītā** | prakāśamānarūpavirahe
+> ca na tadā pūrvakālādiyogitāyāḥ pratibhāsanam … na pratyabhijñā kathañcid
+> api sambhavinī | **tajjātīye tu punardarśanaṃ** pravartate…
+> atha svarūpāt pracyutiḥ kathaṃ na **kapālakāle mudgarādihetukaṃ**
+> bhāvāntaraṃ pracyutir bhavet? atha **kapālakāle ghaṭavināśānabhyupagame**…
+= the fragment's L6 (apūrvakālādiyogi … varttamānatvam eva, na pūrvatā), L3
+(tajjātīya), and the L1–L2 kapālakāla/mudgara complex.
+
 ---
 
 ## 3. Reconstructed Folio
@@ -178,7 +227,7 @@ naitad api yuktaṃ| punardṛṣṭeḥ pūrvatra vṛtter asiddheḥ|
 sā hi purasthaṃ varttamānakālatayā pratyetuḥ, sphuṭarūpānubhāvāt|
 pūrvvakālāditā tu svagrāhyasya na gantum īśā, tatkālādīnāṃ sa
 ⟨ṃpratibhāsasyābhāvāt | yad dhi jñāne sphuṭatayā nodbhāsate na tat tenādhigataṃ
-bhavati | yadi tv anudbhāsamānam apy adhigataṃ syāt, evaṃ sati nī⟩ [○]
+bhavati | yadi tv anudbhāsamānam apy adhigataṃ syāt, evaṃ sati nī⟩ [◇]
 
 Line 6  [lacuna: 48 / 51]
 larūpatayā 'nudbhāsamānaṃ pītaṃ nīlarūpam adhigataṃ bhavati|
@@ -186,26 +235,25 @@ yadi tv apūrvakālādiyogi tādṛśi pratibhāti, tathā sati
 pūrvadeśakāladaśāṃ dṛśāṃ sphuṭatayā saṃpratibhāsanād varttamānatvam eva| na pūrvatā|
 na hi sphuṭam ābhāti punastambhādau pūrvatā| athā
 ⟨sphuṭaiva pūrvatā stambhādau pratibhātīti cet, evaṃ tarhi nīlaṃ sphuṭam ābhāti
-pūrvatā tv asphuṭeti bhinnāv etau pratibhāsau | tataś cāsphuṭabhāta⟩ [○]
+pūrvatā tv asphuṭeti bhinnāv etau pratibhāsau | tataś cāsphuṭabhāta⟩ [◇]
 
-Line 7  [lacuna: 46 / 51]
+Line 7  [lacuna: 47 / 51]
 sya na tadbhāsinas tattvam|
 na hy ābhāsabhede grāhyaikyaṃ yuktaṃ sarvatra bhedoparatiprasaṃgāt|
 tatra paścāddarśanānumeyāpi sthāyitā
 yat punar uktam atijaḍaiḥ pūrvadṛṣṭatā gṛhyata iti tad atipāpīyaḥ,
 pūrvadṛśaś cyutāyā jñānāntarāvedyatvenāpratibhāsane tatkarmmatā
-⟨kuta eva? na hi yad apratibhāsamānaṃ tad grāhyaṃ nāma | tasmāt pūrvadṛṣṭatā na
-gṛhyate, kiṃ tarhi smṛtisahakāriṇā manasā samāro⟩ [○]
+⟨kutaḥ? evaṃ hi sakalātītadṛśām api karmatā pratibhāyād ity atiprasaṅgaḥ |
+tasmāt pūrvadṛṣṭatā smṛtisahakāriṇā manasā samāro⟩ [◇]
 
-Line 8  [lacuna: 52 / 51]
+Line 8  [lacuna: 44 / 51]
 pyādhyānas tīrthyā yuktiḥ| na vājvalanair bhasmīkāryākṛtibhiḥ|
 yadi ca pūrvadarśanabhānuṃ nīlaṃ pratyakṣeneti
 tathā sati bhinnam api pūrvadṛṣṭaṃ tatra bhāsatām|
 atha bhedād eva na bhāsataḥ abhinnaṃ tat pūrvvaṃ dṛṣṭaṃ bhāti| nanu kiṃ bhinnatvāt|
 pūrvadṛṣṭe ghaṭādau na pratyakṣa
-⟨ṃ pramāṇam, atītasya darśanasya tatrāpratibhāsanāt | nāpy anumānam,
-liṅgābhāvāt sāmānyaviṣayatvāc ca | tasmāt pūrvadṛṣṭatāyāṃ na kiṃcit pramāṇam
-asti⟩ [◇]
+⟨ṃ pūrvadṛṣṭatayā pravartate, kiṃ tarhi sannidhānāt | sannidhiś ca darśanād
+eva sidhyati, darśanaṃ ca sannidher itītaretarāśrayaḥ⟩ [◇]
 ```
 
 Line-boundary junctions all yield valid sandhi and syntax:
@@ -294,19 +342,20 @@ case, even if persistence (*sthāyitā*) is inferred from a later seeing — the
 claim made by the extremely dull-witted (*atijaḍa*) that "previously-seen-ness
 is grasped" is utterly fallacious (*atipāpīyaḥ*): since the prior sight has
 perished and does not appear, being unknowable by another cognition, how could
-there be objecthood for it? [For what does not appear cannot be called an
-object of grasping. Therefore "previously-seen-ness" is not grasped; rather it
-is superimposed by the mind aided by memory, and the subsequent] rumination is
-the reasoning of the *tīrthikas* — not [made true] by flames with shapes that
-can be reduced to ash. And if the blue that bears the light of the prior seeing
-were [grasped] by perception, then even a different previously-seen [object]
-should appear there. If you argue that it does not appear precisely because of
-the difference, then [only] the non-different previously-seen appears? But what
-[does it matter] that it is different? For a jar and the like that were
-previously seen, perception is no [valid means of knowledge, because the past
-seeing does not appear there. Nor is inference, due to the absence of a sign
-(*liṅga*) and because it has universals as its object. Thus there is no valid
-means of knowledge at all for "previously-seen-ness."]
+there be objecthood for it? [For then the object-status of *all* past seeings
+would equally appear — an unacceptable over-extension. Therefore
+"previously-seen-ness" is superimposed by the mind aided by memory, and the
+subsequent] rumination is the reasoning of the *tīrthikas* — not [made true]
+by flames with shapes that can be reduced to ash. And if the blue that bears
+the light of the prior seeing were [grasped] by perception, then even a
+different previously-seen [object] should appear there. If you argue that it
+does not appear precisely because of the difference, then [only] the
+non-different previously-seen appears? But what [does it matter] that it is
+different? With regard to a jar and the like that were previously seen,
+perception does not [operate in virtue of their being previously seen, but
+because of their presence. And the presence [of the same thing] is established
+only from the seeing, while the seeing [as grasping the same] is established
+from the presence — a mutual dependence.]
 
 ---
 
@@ -318,10 +367,10 @@ means of knowledge at all for "previously-seen-ness."]
 | 2 | 2 | 48 / 54 | ◇ | Grammar-determined negation feeding L3; D4253 250b–251a (T2) |
 | 3 | 3 | 49 / 52 | ◆ | Verbatim regress in Prajñākaragupta (S1, prpva:7954 + pramanavartu:12754) |
 | 4 | 4 | 64 / 59 | ◇ | Question–answer frame forced by L5; S2; T3 |
-| 5 | 5 | 49 / 56 | ○ | Folio-internal idiom (saṃpratibhāsa, anudbhāsamāna, adhigata) |
-| 6 | 6 | 48 / 51 | ○ | Only available opponent move (asphuṭa-pratibhāsa); feeds L7 ābhāsabheda |
-| 7 | 7 | 46 / 51 | ○ | tatkarmatā reductio; T3 (recognition fuses, does not perceive); samāropya reading of L8 "pyādhyānas" |
-| 8 | 8 | 52 / 51 | ◇ | Folio's own two-pramāṇa frame (L3 sāmānyaviṣayatvāt); folio-final |
+| 5 | 5 | 49 / 56 | ◇ | Folio-internal idiom; principle confirmed by TBV J1 ("na hi nīlatā'pratipattau nīlo 'rtho 'dhigato bhavati") |
+| 6 | 6 | 48 / 51 | ◇ | Opponent move + refutation confirmed by TBV J2 (sphuṭa darśana vs aspaṣṭa smaraṇa = two pratibhāsas) |
+| 7 | 7 | 47 / 51 | ◇ | tatkarmatā reductio with atiprasaṅga, per TBV J1 ("sakalātītadṛggrāhyatāpi pratīyatām", "ity ukteḥ"); samāropya reading of L8 "pyādhyānas" |
+| 8 | 8 | 44 / 51 | ◇ | Continuation per TBV J1: sannidhāna move + itaretarāśraya; folio-final |
 
 ### Lacuna 1 — after *darśanayogyatā* (L1) [◇] 59/55 akṣ
 ⟨kiṃ svarūpeṇa pratyayāntarasākalyena vā | yadi svarūpeṇa, sā mudgarāt prāg api ghaṭāder astīti tadāpi nāśaḥ syāt | atha tasyām avasthāyāṃ sā nāstīti tena rūpeṇābhāvo⟩
@@ -350,36 +399,60 @@ sukhāder bhedaḥ). Validation search returned two exact hits; upgraded to ◆.
 The question–answer frame is forced by L5 ("…**gamyate**, punardarśanāt … iti
 vyavasāyāt | **naitad api yuktam**"). Doctrine: S2 and T3.
 
-### Lacuna 5 — after *tatkālādīnāṃ sa* (L5) [○] 49/56 akṣ
+### Lacuna 5 — after *tatkālādīnāṃ sa* (L5) [◇] 49/56 akṣ
 ⟨ṃpratibhāsasyābhāvāt | yad dhi jñāne sphuṭatayā nodbhāsate na tat tenādhigataṃ bhavati | yadi tv anudbhāsamānam apy adhigataṃ syāt, evaṃ sati nī⟩
 The damaged akṣara [ma/sa] is read **sa(ṃ)** on the strength of L6's own
 "saṃpratibhāsanād". Every content word is recycled from the folio's L6; the
 counterfactual is required by L6's reductio (yellow grasped as blue). The
-reading **nī**[larūpatayā] (for the older guess mū-) makes the reductio exact:
-"a yellow not appearing as blue would be apprehended as blue."
+reading **nī**[larūpatayā] (for the older guess mū-) makes the reductio exact.
+Upgraded ○→◇ 2026-06-13: the governing principle is now independently attested
+in TBV J1 — "**na hi nīlatā'pratipattau nīlo 'rtho 'dhigato bhavati**" — the
+same axiom, the same nīla example.
 
-### Lacuna 6 — after *athā* (L6) [○] 48/51 akṣ
+### Lacuna 6 — after *athā* (L6) [◇] 48/51 akṣ
 ⟨sphuṭaiva pūrvatā stambhādau pratibhātīti cet, evaṃ tarhi nīlaṃ sphuṭam ābhāti pūrvatā tv asphuṭeti bhinnāv etau pratibhāsau | tataś cāsphuṭabhāta⟩
 Sandhi-determined frame: opens with a- (athā- = atha + a-), closes in an a-stem
-genitive whose -sya begins L7. L7's "na hy ābhāsabhede grāhyaikyaṃ yuktam"
-presupposes that an appearance-difference (vivid nīla vs non-vivid pūrvatā) has
-just been established.
+genitive whose -sya begins L7. Upgraded ○→◇ 2026-06-13: TBV J2 attests this
+very move and its refutation — "darśanaṃ **sphuṭapratibhāsaṃ**
+vartamānārthaviṣayatayāvabhāti, smaraṇam apy **aspaṣṭapratibhāsaṃ** bibhrāṇaṃ
+parokṣollekhavad ābhāti — tat katham **ekaḥ pratibhāsaḥ**?" — vivid vs
+non-vivid as two distinct appearances, feeding the bhedoparati argument
+exactly as L7 requires.
 
-### Lacuna 7 — after *tatkarmmatā* (L7) [○] 46/51 akṣ
-⟨kuta eva? na hi yad apratibhāsamānaṃ tad grāhyaṃ nāma | tasmāt pūrvadṛṣṭatā na gṛhyate, kiṃ tarhi smṛtisahakāriṇā manasā samāro⟩
-Reads L8's "pyādhyānas" as *samāro)py ādhyānaḥ* — "rumination after [mental]
-superimposition" — giving the tīrthya-yukti dismissal its referent. The positive
-account (memory-aided superimposition, not perception) matches T3.
+### Lacuna 7 — after *tatkarmmatā* (L7) [◇] 47/51 akṣ — REVISED 2026-06-13
+⟨kutaḥ? evaṃ hi sakalātītadṛśām api karmatā pratibhāyād ity atiprasaṅgaḥ | tasmāt pūrvadṛṣṭatā smṛtisahakāriṇā manasā samāro⟩
+Rebuilt on TBV J1, which preserves this step with an "ity ukteḥ" citation
+marker: "na ca **pūrvadṛśo 'pāye tatkarmatā** arthasya **pracyutā** iti na
+bhāti tadgocaraḥ … apratibhāsanād **anyathātiprasaṅga** ity ukteḥ" and "yadi
+tu pūrvadṛg-anavagame 'pi tadgrāhyatā pratīyate, tathā sati
+**sakalātītadṛggrāhyatāpi pratīyatām**." The lacuna therefore carried the
+atiprasaṅga (object-status to *all* past seeings would appear), then the
+positive account: pūrvadṛṣṭatā is superimposed by the memory-aided mind.
+Retains the *samāro)py ādhyānaḥ* reading of L8's "pyādhyānas" ("rumination
+after superimposing — a tīrthika's reasoning"). Replaces the earlier generic
+proposal ("na hi yad apratibhāsamānaṃ tad grāhyaṃ nāma…"), which lacked the
+attested atiprasaṅga step.
 
-### Lacuna 8 — folio-final (L8) [◇] 52/51 akṣ
-⟨ṃ pramāṇam, atītasya darśanasya tatrāpratibhāsanāt | nāpy anumānam, liṅgābhāvāt sāmānyaviṣayatvāc ca | tasmāt pūrvadṛṣṭatāyāṃ na kiṃcit pramāṇam asti⟩
-The two-pramāṇa denial echoes the folio's own L3 ("nāpy anumānāt …
-sāmānyaviṣayatvāt") and L7 ("apratibhāsane"). Folio-final, so the run-on into
-the next folio is unverifiable.
+### Lacuna 8 — folio-final (L8) [◇] 44/51 akṣ — REVISED 2026-06-13
+⟨ṃ pūrvadṛṣṭatayā pravartate, kiṃ tarhi sannidhānāt | sannidhiś ca darśanād eva sidhyati, darśanaṃ ca sannidher itītaretarāśrayaḥ⟩
+"With regard to the previously seen pot, perception does not operate in virtue
+of previously-seen-ness but because of presence; and the presence [of the same
+thing] is established only from the seeing, the seeing [as grasping the same]
+from the presence — mutual dependence." Rebuilt on TBV J1's continuation of
+the very same dilemma: "na cābhinnasya pūrvadṛggocarasya **sannihitatvāt**
+pratibhāsaḥ … **tatsannidher evāsiddheḥ** | na ca samprati darśanāt
+tatsannidhisiddhiḥ, **itaretarāśrayadoṣāt**." Replaces the earlier generic
+two-pramāṇa closure ("na pratyakṣaṃ pramāṇam … nāpy anumānam…"), which is now
+seen to be premature — the TBV shows the argument continued with the
+sannidhāna move before any closure. Folio-final, so the further run-on remains
+unverifiable.
 
 ---
 
-*Lacunae processed: 8. Confidence: ◆ 1 / ◇ 4 / ○ 3. All proposals within ±15%
-of the akṣara budgets (51–59 per line). Searches: local Tengyur e-texts
-(~/Documents/Tibetan/Tibetan_e_text) + DharmaMitra /primary/. Translation:
-DharmaMitra cat-translate.*
+*Lacunae processed: 8. Confidence: ◆ 1 / ◇ 7 / ○ 0 (after the 2026-06-13
+revision; previously ◆ 1 / ◇ 4 / ○ 3). All proposals within ±15% of the
+akṣara budgets (51–59 per line). Searches: local Tengyur e-texts
+(~/Documents/Tibetan/Tibetan_e_text), local Sanskrit e-texts
+(~/Documents/E-texts, incl. Jaina dialectical corpus) + DharmaMitra /primary/.
+Translation: DharmaMitra cat-translate, with the L7–L8 bracketed segments
+re-rendered after the 2026-06-13 revision.*
