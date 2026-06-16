@@ -160,6 +160,47 @@ Across six independent probes — the Kārikā commentaries, the Yuktidīpikā, 
 
 ---
 
+## 9. Addendum: *pariṇāma* and the spheres of creation
+
+A natural follow-up asks whether the *pariṇāma* — the universe arising from the *puruṣa–prakṛti saṃyoga* — was conceived such that one puruṣa corresponds to one universe. It was not. Three sub-investigations confirm that Sāṃkhya locates the individuation of the many puruṣas in the *interior* (subtle body, buddhi, experience), while keeping the cosmos *common*.
+
+### 9.1 Tattvakaumudī: one prakṛti, one cosmos, per-puruṣa interiority
+
+Vācaspati on SK 21 confirms the mechanism (*"from this union proceeds creation"*; `SA_GSP31_stk:3354–3395`), but the many-one relation is resolved without a per-puruṣa universe:
+
+- **SK 62** (`:5294, 5305`): *"no Spirit is bound, none migrates, none released; it is **Nature alone, having many receptacles** (*anekāśrayā*), that is bound, migrates, released"* — one prakṛti individuated into many bodies, bondage figuratively ascribed to the puruṣas (king/soldiers simile).
+- **SK 40** (`:4283, 4311`): the subtle body (*liṅgaśarīra*) evolves *"for each Spirit individually"*; Nārāyaṇa Tīrtha — *"an astral body is restricted to one particular Spirit."* The *liṅga* is per-puruṣa; the gross cosmos is shared.
+- **SK 59 / 65–66** (`:5269, 5467`): liberation is individuated — the modest dancer (prakṛti) withdraws from the spectator who has seen, but performs on for the others (= Yogasūtra 2.22 *anya-sādhāraṇatvāt*).
+- **SK 18** (`:3210, 3213`): explicitly refutes the unity of spirit (one spirit ⇒ one's birth/death affects all).
+
+The *paṅgv-andha* (one lame + one blind) simile of SK 21 might suggest a one-to-one pairing, but Vācaspati does **not** draw it; he resolves the asymmetry via "one Nature with many receptacles" (SK 62) and the per-puruṣa *liṅga* (SK 40). "One universe per puruṣa" is a *third* option that classical Sāṃkhya declines — it neither reduces to one puruṣa nor pairs each with its own prakṛti.
+
+### 9.2 Tattvavaiśāradī: ādhyātmika/ādhibhautika/ādhidaivika qualifies *suffering*, not *pariṇāma*
+
+In the Yoga commentary the triad appears under **YS 2.15** (*pariṇāma-tāpa-saṃskāra-duḥkha*), classifying the three *tāpas* (`vacaspatimisra_tattvavaisaradi.txt:196`):
+> *ādhyātmikaṃ śārīraṃ vyādhi-vaśān mānasaṃ ca kāmādi-vaśāt; **ādhibhautikaṃ** vyāghrādi-janitam; **ādhidaivikaṃ** graha-pīḍādi-janitam.*
+
+and groups two as external (`:374`): *ādhibhautika-ādhidaivikayos tāpayor **bāhyatvenaikatvaṃ** vivakṣitam* — the *bāhya* (object + cosmic) vs *adhyātma* (self) split. There is **no** threefold *pariṇāma* (sphere/deity scheme) in the Tattvavaiśāradī or the Yogabhāṣya; the term *pariṇāma* in YS 2.15 names one *kind of suffering* (the suffering of change), and the *ādhi-x* triad classifies the *tāpa*.
+
+### 9.3 Purāṇic Sāṃkhya: the genuine adhyātma/adhibhūta/adhidaiva *pariṇāma*
+
+The sphere-scheme of the *transformation* — including the **presiding deities** — is a real doctrine, but it belongs to **Purāṇic Sāṃkhya's three-ahaṃkāra cosmogony**. Mārkaṇḍeya-purāṇa 45.47–50 (`3_purana/unknown_markandeyapurana_adhyaya-1-93_u.txt:6422`):
+> *bhūta-tanmātra-sargo 'yam ahaṃkārāt tu **tāmasāt** … vaikārikād ahaṃkārāt … **sāttvikāt** … buddhīndriyāṇi … **taijasānīndriyāṇy āhur devā vaikārikā daśa** / ekādaśaṃ manas tatra **devā vaikārikāḥ smṛtāḥ***
+
+| Sphere | ahaṃkāra | product |
+|---|---|---|
+| ādhibhautika | *tāmasa* (bhūtādi) | tanmātras → five elements |
+| ādhyātmika | *taijasa* (rājasa) | the ten *indriyas* (+ manas) |
+| ādhidaivika | *vaikārika* (sāttvika) | the ten presiding **deities** |
+
+Deity list, Bhāgavata 2.5.30 (`3_purana/unknown_bhagavatapurana_skandha-02_u.txt:410`): *devā vaikārikā daśa: dig-vāta-arka-praceto-'śvi-vahni-indra-upendra-mitrakāḥ* (Directions, Wind, Sun, Varuṇa, Aśvins, Fire, Indra, Upendra, Mitra, Prajāpati). Parallels: Kūrma 1.4.22, Liṅga 1, Saura.
+
+This differs from the **Kārikā Sāṃkhya** (Gauḍapāda/Māṭhara ad SK 25, `gaudapada_samkhya-bhasya_sharma-ed.txt:357–358`; `isvarakrsna_samkhyakarika_w_mathara-vrtti.txt:556`), where the *indriyas* come from the *sāttvika/vaikṛta* ahaṃkāra and there is **no separate deity-line**. The Purāṇa splits that sāttvika line off as the *deities* and derives the organs from *taijasa* — thereby generating the full triad.
+
+**Bearing on the thesis.** The *ādhibhautika* (elements/objects) and *ādhidaivika* (presiding deities) spheres are **cosmic and common** — one shared world, one Sun, one Indra — for all puruṣas; only the *ādhyātmika* (organ/buddhi/liṅga) sphere is per-individual. This is the cosmological elaboration of Yogasūtra 4.16 (*object common to all puruṣas, minds one-per-puruṣa*), and the strongest reason the *pariṇāma* was never read as "one universe per puruṣa": the *daiva* and *bhauta* spheres are unitary and shared; multiplicity lives only on the *adhyātma* side.
+
+---
+
 ## Appendix: principal loci
 
 **Local Sanskrit (`~/Documents/E-texts/1_sanskr/6_sastra/3_phil/samkhya/` unless noted)**
@@ -189,5 +230,14 @@ Across six independent probes — the Kārikā commentaries, the Yuktidīpikā, 
 | Tarkajvālā | `BO_T04_D3856:247a-34` | auto-commentary on the same |
 | Tattvasaṅgraha (ātmaparīkṣā) | `SA_T11_tattvasangru:3814` | one-and-many self = Jaina |
 | Brahmasūtrabhāṣya | `SA_GSP33_brssgo2u:79` | quotes MBh 12,338; withholds single-self from Kapila |
+
+**§9 Addendum — *pariṇāma* and the spheres**
+| Source | Locus | Content |
+|---|---|---|
+| Tattvakaumudī (SK 21, 40, 59/62) | DharmaMitra `SA_GSP31_stk:3354–3395, 4283/4311, 5269, 5294/5305` | one prakṛti "many receptacles"; per-puruṣa *liṅga*; dancer/bondage |
+| Tattvavaiśāradī (YS 2.15) | `…/yoga/vacaspatimisra_tattvavaisaradi.txt:196, 374` | *ādhi-x* triad = three *tāpas*, not *pariṇāma* |
+| Gauḍapāda / Māṭhara (SK 25) | `gaudapada_samkhya-bhasya_sharma-ed.txt:357`; `…_w_mathara-vrtti.txt:556` | three-ahaṃkāra split; indriyas from *sāttvika*, no deity-line |
+| Mārkaṇḍeya-p. 45.47–50 | `3_purana/unknown_markandeyapurana_adhyaya-1-93_u.txt:6422` | adhibhūta/adhyātma/adhidaiva = tāmasa/taijasa/vaikārika spheres |
+| Bhāgavata-p. 2.5.30 | `3_purana/unknown_bhagavatapurana_skandha-02_u.txt:410` | *devā vaikārikā daśa* — presiding-deity list (cf. Kūrma 1.4.22, Liṅga, Saura) |
 
 **Methodological notes.** The DharmaMitra `segmentnr` direct-lookup path is non-functional in the current deployment (it falls back to a generic search); `include_files` filtering works but ranks non-contiguously, so a chapter cannot be paged through the API — the Tarkajvālā Sāṃkhya chapter was therefore read end-to-end from the local Derge Tengyur. The Yuktidīpikā reading *punar [an]eka iti* (§2.2) is an editorial restoration of a shared archetype error.
