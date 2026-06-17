@@ -143,6 +143,70 @@ classic Sāṃkhya proof of *puruṣa*:
 - Polemical edge: Vyāsa insists the "other" is no *sāmānyamātra* ("mere generality") —
   a jab at the Buddhist *vaināśika*, who can supply only an aggregate (hence itself
   *parārtha*), never the *viśeṣa* that is *puruṣa*.
+- **NOT the Dharmakīrti pair (tested against the Vivaraṇa).** It is tempting to read the
+  *viśeṣa / sāmānyamātra* hierarchy as Dharmakīrti's PV 3.3 pair (*viśeṣa* = *svalakṣaṇa* =
+  *paramārthasat* vs *sāmānya* = *saṃvṛtisat*) "inverted on permanence" — but that is a
+  **loose lexical coincidence**. The **Vivaraṇa** (ascribed to Śaṅkara; preferred here over
+  Vācaspati, who retrojects Dharmakīrtian doctrine — *sahopalambhaniyama* ad 4.23) glosses
+  *para-sāmānyamātram* concretely as **the body/senses/objects** (*śarīram indriyāṇi viṣayā
+  vā*) and the Buddhist's **saṃghāta / santāna**, dismissed as ***avastu*** (*śaśaviṣāṇa-
+  kalpa*, "rabbit's-horn") and as merely *kṣaṇika*; the *viśeṣa* is the puruṣa as
+  ***bhinnajātīya***, a non-composite **permanent** individual. Register = the **Abhidharma
+  pudgala/saṃghāta debate** (wholes/continua = *prajñapti*), **not** the Dignāgan/
+  Dharmakīrtian *svalakṣaṇa/sāmānyalakṣaṇa* pair — no *svalakṣaṇa*, no *arthakriyā*, no
+  *paramārtha/saṃvṛti*, and the "real" pole is the **permanent** puruṣa (inverse axis from
+  the momentary svalakṣaṇa). The Vivaraṇa routes the refutation back to 4.19
+  (*vyatiriktadṛśyatvāt*, rejecting *dharmamātra* + *kṣaṇikatva*) — a Dignāgan-level tool.
+  By contrast, the genuinely Dignāgan *viśeṣa/sāmānya* epistemics *do* surface elsewhere —
+  YBh 1.25 (*anumānaṃ na viśeṣapratipattau samartham*) and the *svasaṃvedana* refutation at
+  4.19–22. See the consolidated report `output/reports/pys-pramanavada-points-of-contact.md`
+  (§1, §5 inversion note) and `output/reports/dharmakirti-svalaksana-paramarthasat.md`.
+- The companion *bhāṣya* line *na jñānaṃ jñānārtham … parārtham* ("cognition is not for
+  its own sake") is already the **anti-*svasaṃvedana*** thesis (see §III.2-ter).
+
+### 2-bis. 4.25 — the self-questions and *nairātmya* inverted to *true-ātman*
+
+Vyāsa's catalogue of the self-questioning that ceases for the *viśeṣadarśin* —
+*ko 'ham āsaṃ katham aham āsaṃ kiṃsvid idaṃ kathaṃsvid idaṃ ke bhaviṣyāmaḥ kathaṃ vā
+bhaviṣyāmaḥ* ("Who was I? How was I? … What shall we become? How?") — is the **Buddhist
+three-times self-doubt formula**, and unlike the Pāli loci of §III.3 it **is** in the
+corpus in Sanskrit Buddhist dress: the **Śrāvakabhūmi** (`SA_T06_srabhu_u:2013`):
+*ko nv aham abhūvaṃ, kathaṃ nv aham abhūvam atīte 'dhvani / ko nv ahaṃ bhaviṣyāmy
+anāgate 'dhvani … ke santaḥ ke bhaviṣyāmaḥ* — i.e. the *ṣoḍaśa-vicikitsā* of the
+Sabbāsava-sutta (MN 2), the doubts the noble disciple abandons on seeing the truth.
+- **Structural inversion.** Both traditions: *a darśana dissolves the self-questioning and
+  liberates.* The target Vyāsa reverses is **canonical Buddhist soteriology** — the
+  noble disciple's abandonment of the self-doubts *on seeing the truth*
+  (Sabbāsava-sutta MN 2 / Śrāvakabhūmi, **pre-Dignāga**); there the liberating *darśana* is
+  **nairātmya-darśana**. (Dharmakīrti *versifies* this same inherited doctrine at PV
+  2.218–219, *ātmani sati parasaṃjñā…*; the verse is an illustrative parallel, **not** the
+  source — 4.25 carries no Dharmakīrtian marking.) For Yoga the *darśana* is instead
+  **viśeṣa-darśana** — seeing the *true* self (puruṣa) as distinct from the citta
+  (*cittasyaivaiṣa vicitraḥ pariṇāmaḥ, puruṣas tu … śuddhaḥ*). Identical therapeutic
+  structure, content reversed: **anātman vs. true-ātman**. NB (inversion principle):
+  the reversal proves acquaintance with nairātmya only at its *canonical* specificity —
+  hence "knew canonical Buddhism," not "knew Dharmakīrti." Cf. report §5 methodological note.
+- **The *sva/para* axis is shared, valenced oppositely.** 4.24 is built on *svārtha/parārtha*
+  where the *para* (the beneficiary) **is** the self (puruṣa), the goal of the path;
+  Dharmakīrti's *ātmani sati parasaṃjñā* makes the very arising of a *para* the disease.
+
+### 2-ter. 4.22 / 4.33 within the larger pramāṇavāda engagement
+
+Two in-scope loci belong to the broader dossier assembled in
+`output/reports/pys-pramanavada-points-of-contact.md`:
+- **4.22** *svabuddhisaṃvedanam* — the unchanging *citi* "cognizing its own buddhi" is a
+  deliberately near-homonymous Yoga coinage *against* Buddhist *svasaṃvedana*: it is not a
+  cognition cognizing *itself*. The frontal refutation of self-luminous cognition is at
+  **4.19–4.21** (out of this apparatus's 4.22–34 range): *na tat svābhāsaṃ dṛśyatvāt*
+  (`SA_GSP34_patyogbu:1450`), whose *pūrvapakṣa* states Dignāga's *dvirūpa* doctrine
+  verbatim — *cittam eva svābhāsaṃ viṣayābhāsaṃ ca … agnivat* — and is met with the
+  classic fire-analogy rebuttal. **Strongest Dignāgan fingerprint in the *bhāṣya*.**
+- **4.33** *kṣaṇapratiyogī … kramaḥ* — Vyāsa accepts the *kṣaṇa* as the unit of succession
+  but embeds it in *kūṭasthanityatā* (puruṣa) + *pariṇāminityatā* (guṇas): *kṣaṇa* without
+  *kṣaṇa-bhaṅga*. The anti-*kṣaṇikatva* stance, with the supporting *satkāryavāda* at
+  **4.12–13** (*nāsty asataḥ saṃbhavaḥ … atītānāgataṃ svarūpato 'sti*) and the
+  dharma/dharmin gold-analogy at **3.13** — but in the **generic Sāṃkhya** idiom, with no
+  specifically Dharmakīrtian instrument (no *arthakriyā*-based *sattvānumāna*).
 
 ### 3. 4.33 — the four-fold *pañha-vyākaraṇa* (the deepest Buddhist parallel)
 
