@@ -4,6 +4,12 @@
       "Bash(./scripts/cat-translate.sh:*)",
       "Bash(./scripts/primary-search.sh:*)",
       "Bash(./scripts/trim-primary.sh:*)",
+      "Bash(./scripts/nexus.sh:*)",
+      "Bash(./scripts/identify-text.py:*)",
+      "Bash(./scripts/build-corpus-index.py:*)",
+      "Bash(./scripts/setup.sh:*)",
+      "Bash(python3 scripts/identify-text.py:*)",
+      "Bash(python3 scripts/build-corpus-index.py:*)",
       "Bash(jq:*)",
       "Bash(pandoc:*)",
       "Bash(pdftotext:*)",
@@ -11,6 +17,18 @@
       "Bash(ls:*)",
       "Bash(find:*)",
       "Bash(wc:*)"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/scripts/build-corpus-index.py\" --max-age-days 30 --quiet"
+          }
+        ]
+      }
     ]
   }
 }
