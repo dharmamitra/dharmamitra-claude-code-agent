@@ -46,25 +46,18 @@ use `--meta` to read a text's date estimate and known translations before interp
 
 ### 2. Whole-text intersection — `scripts/nexus.sh table <filename>`
 The heart of macro-intertextuality: every precomputed parallel between this text and the rest of the
-corpus. **Start with `--agg`** — it collapses the segment-pairs into a ranked table of *which texts*
-this one shares material with, and how much:
+corpus. Every call returns the **complete** intersection in one response (the wrapper sets
+`skip_pagination` for you), so there is no paging and no page-0 undercount to worry about. **Start with
+`--agg`** — it collapses the segment-pairs into a ranked table of *which texts* this one shares material
+with, and how much:
 
 ```bash
-./scripts/nexus.sh table SA_T07_vakobhau --agg          # quick survey — PAGE 0 ONLY (first 100 rows)
-./scripts/nexus.sh table SA_T07_vakobhau --agg --all    # COMPLETE census — auto-paginates every page
+./scripts/nexus.sh table SA_T07_vakobhau --agg     # COMPLETE per-target-text census: parallels, max_score, total length
 ```
 
-**Pagination is not a footnote — it changes the answer.** The API returns 100 rows per page, and a
-plain call (and `--agg` over it) sees only page 0. For a densely-connected text that is a tiny,
-misleading slice: e.g. the Abhidharmakośabhāṣya shows **51** neighbours on page 0 but **700+** with
-`--all`, and its overlap with Ghoṣaka's Abhidharmāmṛta is **6** parallels on page 0 vs. **334** in the
-census. So:
-- Use bare `--agg` only as a fast first look to see *whether the signal is large*.
-- Use `--agg --all` whenever a count matters or you might otherwise miss a neighbour.
-- **A rare target may not appear on page 0 at all** — never conclude "no relationship" from a non-`--all`
-  survey. (For a specific A-vs-B question, the filtered call below is both faster and reliable.)
-- `--all` on a hugely-connected text can hit the 10k-row safety cap (it warns); narrow with filters,
-  `--par-length`, or `--score` rather than paging the whole thing.
+The complete table of a well-connected text is large but real — e.g. the Abhidharmakośabhāṣya touches
+**830+** texts (its overlap with Ghoṣaka's Abhidharmāmṛta alone is 334 parallels). `--agg` is how you
+make that legible. A whole-text census can be many MB and take a few seconds; that's expected.
 
 Then drill — the same call without `--agg` gives the segment-level rows (`root_segnr_range`,
 `par_segnr_range`, aligned `root_text` / `par_text`, `score`, lengths, `src_lang`/`tgt_lang`).
@@ -74,22 +67,22 @@ prefer a filtered call over fetching the whole table and filtering yourself:
 
 ```bash
 # "Does A cite/share with exactly text B?" — server-filtered + complete. THE canonical comparison call.
-./scripts/nexus.sh table SA_T07_vakobhau --include-files SA_T07_vakobhk --all
+./scripts/nexus.sh table SA_T07_vakobhau --include-files SA_T07_vakobhk
 
 # Only its overlaps with the Tengyur Madhyamaka literature, in Tibetan
-./scripts/nexus.sh table SA_T07_vakobhau --include-collections "bsTan 'gyur" --languages bo --all
+./scripts/nexus.sh table SA_T07_vakobhau --include-collections "bsTan 'gyur" --languages bo
 
 # Everything EXCEPT self-overlap with its own chapter-split siblings
-./scripts/nexus.sh table SA_T07_vakobhau --exclude-files SA_T07_vakobhau1,SA_T07_vakobhau2 --all
+./scripts/nexus.sh table SA_T07_vakobhau --exclude-files SA_T07_vakobhau1,SA_T07_vakobhau2
 
 # Only substantial, high-confidence parallels
-./scripts/nexus.sh table SA_T07_vakobhau --par-length 50 --score 70 --all
+./scripts/nexus.sh table SA_T07_vakobhau --par-length 50 --score 70
 ```
-For a focused two-text question, add `--all`: the server filter keeps the result small, so the full
-census is cheap *and* you don't miss parallels that fall past page 0. Filter values are **exact-match**:
-a wrong or mistyped `filename` silently returns 0 rows (a false negative), so confirm the ID first.
+Filter values are **exact-match**: a wrong or mistyped `filename` silently returns 0 rows (a false
+negative), so confirm the ID first. For a big whole-text comparison, a `--include-collections` /
+`--score` / `--par-length` filter keeps the response small and the signal sharp.
 Filter labels (`--include-categories`, `--include-collections`) must match what `menu` reports for that
-language. Without `--all`, results are 100 rows/page — bump `--page` to walk them manually.
+language.
 
 ### 3. Segment-level parallels — `scripts/nexus.sh matches <segmentnr> …`
 Given specific segments (from `/primary/`, from a `table` row, or from the user), retrieve every
@@ -111,20 +104,17 @@ receive from, the philologist.
 
 2. **Frame the question as macro or micro.**
    - *Macro* ("what does this text draw on / who reuses it / how does it sit in the canon") →
-     `table --agg` (quick look), then `table --agg --all` for the real picture, then drill into the
-     most significant target texts.
+     `table --agg`, then drill into the most significant target texts.
    - *Micro* ("where does this specific verse go") → `matches` on the segment(s), or `/primary/` first if
      you only have wording.
    - *Comparative* ("does A cite B / compare A against the Mahābhārata / against the Vinaya") →
-     `table` with `--include-files` / `--include-categories` / `--include-collections`, **plus `--all`** —
-     the server filter keeps it cheap and complete. This is the reliable way to answer a yes/no
-     "does A relate to B"; never answer it from a page-0 survey.
+     `table` with `--include-files` / `--include-categories` / `--include-collections`. The server filter
+     keeps it small; this is the reliable way to answer a yes/no "does A relate to B".
 
-3. **Survey, then census, then drill.** A bare `--agg` is a fast first look (page 0 only). Before you
-   draw any conclusion about *how much* or *whether* a relationship exists, run the `--all` census —
-   page 0 can undercount neighbours by 10× and can omit a rare target entirely. Then pull segment-level
-   rows only for the target texts that matter. Don't dump every row of a large table; lead with the
-   shape (which texts, how much, how strong), then quote the pairs that carry the argument.
+3. **Census, then drill.** Every `table` call already returns the complete intersection, so `--agg` is a
+   true census — read it first to see which texts carry the signal and how strong it is. Then pull
+   segment-level rows only for the target texts that matter. Don't dump every row of a large table; lead
+   with the shape (which texts, how much, how strong), then quote the pairs that carry the argument.
 
 4. **Cross the language boundary deliberately.** A Sanskrit text's most telling parallels may be its
    Tibetan or Chinese translation, or a citation in a text surviving only in translation. Use
@@ -183,12 +173,9 @@ receive from, the philologist.
   even for a real, correctly-identified file (e.g. a commentary whose overlaps were never precomputed).
   0 ≠ "no relationship" — fall back to: run `table` on the *root/base* text instead; or take the text's
   segments and run `matches` / `/primary/` on them. Always say which path produced the result.
-- **`--agg` first, but `--all` before you conclude.** Bare `--agg` summarizes page 0 only; the `--all`
-  census auto-paginates the whole intersection. Page 0 can undercount neighbours by an order of
-  magnitude and can miss a rare target completely, so any count or yes/no rests on `--all` (or on a
-  server-filtered `--include-files --all` call). `--all` paces requests and backs off the endpoint's
-  rate limit (HTTP 429) automatically; if it warns of a partial or 10k-cap result, narrow with filters
-  or `--par-length`/`--score` and say so.
+- **`table` is complete by default** (the wrapper sets `skip_pagination`), so `--agg` is a full census,
+  not a sample — no paging, no page-0 undercount. A whole-text census can be many MB / a few seconds;
+  that's normal. Lead with `--agg`, then drill.
 - **Filters are server-side and exact-match.** Prefer `--include-*` / `--exclude-*` / `--score` /
   `--par-length` over pulling the whole table and filtering by hand. But a wrong/mistyped `filename` in
   `--include-files` silently yields 0 rows — confirm IDs before trusting an empty result.
