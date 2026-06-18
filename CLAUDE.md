@@ -1,7 +1,7 @@
 # DharmaMitra Agent Starterpack — Project Context
 
 This folder is a starter project for using Claude Code with the **DharmaMitra**
-API to do two things on classical Asian Buddhist texts:
+and **DharmaNexus** APIs to do three things on classical Asian Buddhist texts:
 
 1. **Translation** — multi-witness machine translation of canonical passages
    (Tibetan, Chinese, Pali, Sanskrit → English / German / …) with the user's
@@ -9,17 +9,21 @@ API to do two things on classical Asian Buddhist texts:
 2. **Philology / critical editions** — using cross-language parallel retrieval
    to surface variant readings, suggest emendations, and build a critical
    apparatus around a passage.
+3. **Intertextuality research** — using DharmaNexus's precomputed match layer to
+   map how a text relates to the rest of the canon: which works quote, share, or
+   rework it, and where its passages travel across collections and languages.
 
 A user typically arrives with: a source text in one or more canon languages,
 optional reference translations of the same or related works, and a goal
-(translate this whole sūtra; build an apparatus around chapter 5; etc.).
+(translate this whole sūtra; build an apparatus around chapter 5; trace what the
+Abhidharmakośabhāṣya draws on; etc.).
 
 Your job is to drive the DharmaMitra API on their behalf — chunking, threading
 context, citing properly, and writing structured output to disk.
 
 ---
 
-## The two endpoints
+## The translation & search endpoints
 
 Both POST, both JSON, both unauthenticated. Call via the wrapper scripts —
 they're already on PATH-shape and handle timeouts:
@@ -30,6 +34,10 @@ they're already on PATH-shape and handle timeouts:
 Pipe the JSON body in on stdin, or pass `--file body.json`. Add `--trim` to
 `primary-search.sh` to strip the heavy `vector` and `text_new` fields before
 feeding results to a model.
+
+The third capability, **intertextuality**, runs on the DharmaNexus `api-db`
+endpoints via `./scripts/nexus.sh` (+ the local `identify-text.py`) — see the
+dedicated section below.
 
 ### 1. cat-translate — multi-source canonical translation
 
