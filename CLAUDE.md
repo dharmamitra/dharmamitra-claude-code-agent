@@ -290,6 +290,22 @@ this maps *outward* from a text or segment to everything in the canon it touches
    variant — recommend a critical-edition pass on those segmentnrs, one passage at a time.
 7. **Write the report** to `output/intertextuality/<work>.md`.
 
+**Worked pattern — authorial reuse vs. boilerplate (the subtraction).** A raw overlap list rarely
+answers a real question; two texts can share a passage because one author reused his own phrasing
+(interesting), or because both quote a sūtra or repeat a stock definition (not). Separate them in two
+steps: (1) get the candidate overlaps with a server-filtered census,
+`nexus.sh table <A> --include-files <B>`; (2) for each substantive pair, run
+`nexus.sh matches <A-segmentnr> --agg` to see *every* text sharing that passage. If the parallels
+**collapse onto a small meaningful set** (e.g. one author's other works) it's distinctive; if they're
+**spread across many unrelated texts** it's boilerplate; if **dominated by canonical witnesses** it's a
+shared scriptural quotation. Exclude self-recensions of the anchor from the count.
+*Example:* to test whether Sthiramati's Madhyāntavibhāgaṭīkā (`SA_T06_sthmavtyg`) shares *distinctively
+his* material with his Triṃśikābhāṣya (`SA_T06_sthtvbh`) and Pañcaskandhakavibhāṣā (`SA_T06_pskvbhu`),
+`table --include-files` found 113 + 81 parallels, but only the ones whose `matches --agg` census
+collapsed onto Sthiramati's own works (e.g. the *paratantra* etymology) counted — the pratītyasamutpāda
+formula, attested in 19 texts, was filtered out as scriptural. The verdict rests on the subtraction,
+not the raw count.
+
 ### Direct segment lookup
 
 `/primary/` with `source_filters.segmentnr` set. `search_input` must still be

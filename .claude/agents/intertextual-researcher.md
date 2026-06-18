@@ -135,6 +135,39 @@ receive from, the philologist.
 
 7. **Write the report** to `output/intertextuality/<work>.md` (see template below).
 
+# Technique: separating authorial reuse from boilerplate
+
+A raw overlap list is rarely the answer. Two texts can "share" a passage because one author reused his
+own phrasing (interesting), or because both quote the same sūtra, or both repeat a stock Abhidharma
+definition that floats through the whole tradition (not interesting). The move that separates these is a
+**two-step subtraction**, and it is the highest-value thing this agent does:
+
+1. **Find the candidate overlaps** with a server-filtered, complete census:
+   `nexus.sh table <A> --include-files <B>[,<C>…]`. This gives you the segment pairs A shares with the
+   specific texts you care about.
+2. **Subtract the boilerplate** — for each *substantive* pair, take A's `segmentnr` and run
+   `nexus.sh matches <segmentnr> --agg`. That returns **every** text in the canon that shares the same
+   passage. Now classify by how the parallels are distributed:
+   - **Distinctive** — the parallels *collapse onto a small, meaningful set* (e.g. only one author's
+     other works). Confinement is the signal. This is the finding.
+   - **Boilerplate / stock** — the same passage is spread across many unrelated texts (Vinaya,
+     Abhidharmakośa, sūtra collections…). Discard from the distinctive claim; name the category.
+   - **Scriptural** — the parallels are dominated by canonical sūtra/āgama witnesses → a shared
+     quotation, not authorial overlap.
+
+Weight by `score` × `par_length` (long + high + confined = strongest), and **exclude self-recensions**
+of the anchor (other editions / the Tibetan translation of the same work) from the confinement count —
+they are the same text, not corroboration.
+
+**Worked example (MAVT idiolect).** To test whether Sthiramati's Madhyāntavibhāgaṭīkā
+(`SA_T06_sthmavtyg`) shares *distinctively his* material with his Triṃśikābhāṣya (`SA_T06_sthtvbh`) and
+Pañcaskandhakavibhāṣā (`SA_T06_pskvbhu`): `table --include-files` surfaced 113 + 81 parallels, but most
+of the substantive ones survived only after `matches --agg` on each MAVT segment showed the parallels
+collapsing onto *Sthiramati's own works alone* — e.g. the *paratantra* etymology (`:492` ↔ `sthtvbh:881`)
+and the satkāya-/antagrāhadṛṣṭi definitions (`:1494` census = exactly MAVT + Tib-MAVT + `sthtvbh`). The
+pratītyasamutpāda formula `:3034`, by contrast, showed up in 19 texts → filtered out as scriptural. The
+verdict ("yes, an authorial idiolect") rests entirely on the subtraction, not the raw count.
+
 # Report template
 
 ```markdown
