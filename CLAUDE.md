@@ -175,14 +175,20 @@ Use it to discover the exact `category` / `collection` labels for `table` filter
 
 ### 2. `nexus.sh table <filename>` — whole-text intersection (`POST /table-view/table/`)
 
-The core macro-intertextuality view. **Start with `--agg`:**
+The core macro-intertextuality view. **Start with `--agg`, but census with `--all` before concluding:**
 
 ```bash
-./scripts/nexus.sh table SA_T07_vakobhau --agg   # ranked target texts: parallels, max_score, total length
-./scripts/nexus.sh table SA_T07_vakobhau         # segment-level rows (aligned root/par text, score, langs)
+./scripts/nexus.sh table SA_T07_vakobhau --agg          # quick survey — PAGE 0 ONLY (first 100 rows)
+./scripts/nexus.sh table SA_T07_vakobhau --agg --all    # COMPLETE census — auto-paginates every page
+./scripts/nexus.sh table SA_T07_vakobhau                # segment-level rows (aligned root/par text, score, langs)
 ```
 
-Rich filters for focused comparison (labels must match what `menu` reports):
+The API returns 100 rows/page; a plain call (and `--agg` over it) sees only page 0. For a
+densely-connected text that undercounts badly (e.g. 51 neighbours on page 0 vs. 700+ with `--all`),
+and a rare target may not appear at all. Use `--all` whenever a count matters or you'd otherwise miss a
+neighbour; it paces requests and backs off the endpoint's rate limit (429) automatically, and warns if
+it hits the 10k-row cap. Rich filters are applied **server-side** — for a focused "does A relate to B"
+question, `--include-files <B> --all` is both cheap and complete:
 
 ```bash
 --include-files / --exclude-files A,B            # vs. specific text(s)
@@ -307,7 +313,8 @@ before/after, you'd need a passage-detail endpoint that isn't in this kit.
 - Don't drop `max_depth` to `200` just because that's the API default — for LLM consumption it's wasteful.
 - Don't lose the per-witness segmentnr when citing — that's the philological audit trail.
 - Don't strip `summary` from `/primary/` results before triage; it's often the only signal that a hit is a quotation in a commentary vs. the canonical text itself.
-- Don't read an empty `nexus.sh table` result as "no intertextual relationship" — not every text's overlaps are precomputed. Fall back to the root text or to `matches` / `/primary/` on its segments.
+- Don't read an empty `nexus.sh table` result as "no intertextual relationship" — not every text's overlaps are precomputed, and a mistyped filter `filename` silently returns 0. Confirm the ID, then fall back to the root text or to `matches` / `/primary/` on its segments.
+- Don't draw a count or a yes/no from a non-`--all` `table` — bare results are page 0 only (100 rows) and can undercount by 10×. Census with `--all`, or filter server-side with `--include-files <B> --all`.
 - Don't dump every row of a large `table` result into the report — lead with the `--agg` shape, then quote the parallels that carry the argument.
 
 ## Folder layout
