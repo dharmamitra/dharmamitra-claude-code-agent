@@ -139,6 +139,76 @@ URL.
 
 ---
 
+## DharmaNexus intertextuality (`api-db`)
+
+`/primary/` finds passages by *meaning*. The **DharmaNexus** layer answers the
+complementary question: once you *have* a passage or a whole text, what else in
+the canon does it overlap with — precomputed, exhaustively, across languages.
+This is the toolkit of the **intertextual-researcher** subagent. One wrapper,
+`./scripts/nexus.sh`, with three live subcommands plus a local text-identifier.
+
+Everything is keyed on a DharmaNexus **`filename`** (e.g. `SA_T07_vakobhau`) or a
+**`segmentnr`**. Resolve titles/authors to filenames first.
+
+### 0. `scripts/identify-text.py` — resolve a description to a filename (local, offline)
+
+```bash
+./scripts/identify-text.py "yasomitra abhidharma commentary" --top 5
+./scripts/identify-text.py "madhyamakavatara" --lang bo --table
+```
+
+Reads a local cache of the whole corpus map (`data/corpus-index.json`), fuzzy-matches
+(difflib, diacritics-insensitive) and returns ranked `filename` candidates. The cache
+is built by `scripts/build-corpus-index.py` — automatically on first session via the
+`SessionStart` hook, refreshed when it ages past 30 days, or on demand with
+`./scripts/setup.sh --force`. **No network call** at match time. Always confirm a hit
+by its `displayName` before building on it.
+
+### 1. `nexus.sh menu <lang>` — the corpus map (`GET /menudata/`)
+
+```bash
+./scripts/nexus.sh menu sa                       # compact tree: collection → category → {displayName, filename}
+./scripts/nexus.sh menu sa --meta SA_T07_yabhkvyu  # one file's rich metadata: date estimate, AI summary, translations
+```
+Use it to discover the exact `category` / `collection` labels for `table` filters, and
+`--meta` to read a text's date and known translations before interpreting overlaps.
+
+### 2. `nexus.sh table <filename>` — whole-text intersection (`POST /table-view/table/`)
+
+The core macro-intertextuality view. **Start with `--agg`:**
+
+```bash
+./scripts/nexus.sh table SA_T07_vakobhau --agg   # ranked target texts: parallels, max_score, total length
+./scripts/nexus.sh table SA_T07_vakobhau         # segment-level rows (aligned root/par text, score, langs)
+```
+
+Rich filters for focused comparison (labels must match what `menu` reports):
+
+```bash
+--include-files / --exclude-files A,B            # vs. specific text(s)
+--include-categories / --exclude-categories ...
+--include-collections / --exclude-collections ...
+--languages bo                                   # restrict parallels' language
+--par-length 50 --score 70                       # only substantial, high-confidence overlaps
+--sort position|length   --page N                # 100 rows/page
+```
+
+### 3. `nexus.sh matches <segmentnr> …` — segment-level parallels (`POST /matches/`)
+
+```bash
+./scripts/nexus.sh matches SA_K02_sspp2_3u:7287 SA_K02_sspp2_3u:7288
+./scripts/nexus.sh matches --agg SA_K02_sspp2_3u:7287
+```
+Every precomputed parallel for the given segments, with aligned `root_text`/`par_text`,
+`score`, and each parallel's `par_segnr` + text name. This is the unit you trade with the
+philologist: a single verse traced outward.
+
+**Gotcha:** a `table` call can return **0 rows** for a real, correctly-identified file whose
+overlaps were never precomputed. 0 ≠ "no relationship" — fall back to the root/base text, or
+to `matches` / `/primary/` on the text's segments, and say which path you used.
+
+---
+
 ## Workflows
 
 ### Translation workflow
@@ -185,6 +255,29 @@ not a metadata slot.
 6. **Optional: stylised back-translation.** For each variant, run `cat-translate` with `focus` set to that witness's language and `style_instruction: "hyper-literal: preserve every compound, give the original term in parentheses on first occurrence, no editorial smoothing"`. This is what the witness *says*, in English, for the apparatus.
 7. **Write the apparatus.** Output to `output/critical-editions/<work>.md`. One section per anchor passage, with: anchor text, parallels list (segmentnr + src_link), variants table, emendations proposed, notes.
 
+### Intertextuality / corpus mapping
+
+For the **intertextual-researcher** subagent. Where philology drills *into* a passage,
+this maps *outward* from a text or segment to everything in the canon it touches.
+
+1. **Identify the text.** Resolve the user's title/author/description to a `filename`
+   with `./scripts/identify-text.py "<description>"`. Confirm by `displayName`. If the
+   user gave a passage, get its `segmentnr`s via `/primary/` first.
+2. **Frame macro / micro / comparative.**
+   - *Macro* (how does this text sit in the canon) → `nexus.sh table <filename> --agg`.
+   - *Micro* (where does this verse travel) → `nexus.sh matches <segmentnr> …`.
+   - *Comparative* (text A vs. text B / vs. a category / collection) → `table` with
+     `--include-files` / `--include-categories` / `--include-collections`.
+3. **Survey with `--agg`, then drill.** Read the aggregate (which texts, how much, how
+   strong) before pulling segment-level rows. Don't dump every row.
+4. **Cross the language boundary deliberately.** Use `--languages` and read `tgt_lang`;
+   a cross-language parallel means transmission/translation, not just shared source.
+5. **Interpret with `score` + `par_length`** (long+high = substantive; short+high = stock
+   phrase) and `menu --meta` dates for direction of borrowing — mark direction as a suggestion.
+6. **Hand seams to the philologist.** Where a parallel *differs* from the anchor, that's a
+   variant — recommend a critical-edition pass on those segmentnrs, one passage at a time.
+7. **Write the report** to `output/intertextuality/<work>.md`.
+
 ### Direct segment lookup
 
 `/primary/` with `source_filters.segmentnr` set. `search_input` must still be
@@ -205,6 +298,7 @@ before/after, you'd need a passage-detail endpoint that isn't in this kit.
 - `target_language`: always a label string (`"english"`, not `"en"`).
 - Always pipe `/primary/` responses through `--trim` before reading the JSON — the `vector` field will otherwise wreck your context window.
 - Cite using the returned `src_link`. Don't construct DharmaMitra URLs.
+- Intertextuality: resolve a title to a `filename` with `identify-text.py` and **confirm it by `displayName`** before any `nexus.sh` call. Always run `nexus.sh table` with `--agg` first, then drill.
 
 ## Anti-patterns
 
@@ -213,19 +307,23 @@ before/after, you'd need a passage-detail endpoint that isn't in this kit.
 - Don't drop `max_depth` to `200` just because that's the API default — for LLM consumption it's wasteful.
 - Don't lose the per-witness segmentnr when citing — that's the philological audit trail.
 - Don't strip `summary` from `/primary/` results before triage; it's often the only signal that a hit is a quotation in a commentary vs. the canonical text itself.
+- Don't read an empty `nexus.sh table` result as "no intertextual relationship" — not every text's overlaps are precomputed. Fall back to the root text or to `matches` / `/primary/` on its segments.
+- Don't dump every row of a large `table` result into the report — lead with the `--agg` shape, then quote the parallels that carry the argument.
 
 ## Folder layout
 
 ```
 .claude/
-  agents/        — specialised subagents (translator, philologist, …)
-  commands/      — slash commands (/translate, /find-parallels, …)
-  settings.json  — permissions allowlist for scripts + jq
-scripts/         — wrapper scripts for the two endpoints
+  agents/        — specialised subagents (translator, philologist, intertextual-researcher, …)
+  commands/      — slash commands (/translate, /find-parallels, /intertextuality, /identify-text, …)
+  settings.json  — permissions allowlist + SessionStart hook that builds the corpus index
+scripts/         — wrapper scripts: cat-translate.sh, primary-search.sh, nexus.sh (intertextuality),
+                   identify-text.py + build-corpus-index.py + setup.sh (local text ID)
 sources/         — user drops source texts here (one file per language)
 references/      — user drops reference translations, glossaries, style guides
-output/          — your written output: translations/, critical-editions/
-examples/        — sample request bodies for both endpoints
+output/          — your written output: translations/, critical-editions/, intertextuality/
+data/            — generated cache (corpus-index.json); .gitignored, rebuilt on demand
+examples/        — sample request bodies for the endpoints
 ```
 
 When the user opens this folder for the first time and asks "what can you do

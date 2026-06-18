@@ -17,9 +17,20 @@ your install or as templates when constructing new requests.
 
 # Direct segment lookup by ID
 ./scripts/primary-search.sh --file examples/primary-search-by-segmentnr.json --trim
+
+# Intertextuality: every parallel for a set of segments
+./scripts/nexus.sh matches --file examples/nexus-matches.json --agg
+
+# Intertextuality: a whole text's intersection with the rest of the corpus
+./scripts/nexus.sh table --file examples/nexus-table.json --agg
+
+# Resolve a human description to a corpus filename (local, offline)
+./scripts/identify-text.py "yasomitra abhidharma commentary" --table
 ```
 
 The translation call takes 3–8 seconds. Search calls take 0.3–3 seconds.
+DharmaNexus `matches` / `table` calls take ~1–5 seconds; `identify-text.py` is instant
+(it reads the local `data/corpus-index.json`, built once by `./scripts/setup.sh`).
 
 ## What each example demonstrates
 
@@ -27,3 +38,5 @@ The translation call takes 3–8 seconds. Search calls take 0.3–3 seconds.
 - **`primary-search-semantic.json`** — semantic search in English against the Tibetan corpus. Best general-purpose mode; uses an English vector pivot internally.
 - **`primary-search-regular.json`** — lexical-only search for an exact Sanskrit phrase. Use this mode for proper-name searches and verbatim lookups.
 - **`primary-search-by-segmentnr.json`** — direct passage lookup. `search_input` is required by the schema even though it's ignored when `segmentnr` is set; pass the segmentnr itself as a placeholder.
+- **`nexus-matches.json`** — body for `nexus.sh matches`: a list of `segment_nrs` whose precomputed parallels you want. `--agg` collapses them to per-target-text counts.
+- **`nexus-table.json`** — body for `nexus.sh table`: a `filename` plus the full filter block (min `par_length`/`score`, language and include/exclude file/category/collection lists). The convenience flags on `nexus.sh table` build this body for you; the file is here as a template.

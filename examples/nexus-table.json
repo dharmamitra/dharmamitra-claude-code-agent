@@ -1,0 +1,17 @@
+{
+  "filename": "SA_T07_vakobhau",
+  "filters": {
+    "par_length": 30,
+    "score": 0,
+    "languages": ["all"],
+    "include_files": [],
+    "exclude_files": [],
+    "include_categories": [],
+    "exclude_categories": [],
+    "include_collections": [],
+    "exclude_collections": []
+  },
+  "page": 0,
+  "sort_method": "position",
+  "folio": ""
+}

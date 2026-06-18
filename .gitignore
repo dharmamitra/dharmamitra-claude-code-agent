@@ -2,9 +2,21 @@
 *.swp
 .vscode/
 .idea/
+__pycache__/
 
 # User content: keep folder structure + READMEs, ignore everything else
 sources/*
 !sources/README.md
 references/*
 !references/README.md
+
+# Generated cache (rebuilt by scripts/build-corpus-index.py)
+data/*
+!data/README.md
+
+# Generated output: ship the folder skeleton (READMEs + .gitkeep), never the reports/results
+output/**
+!output/**/
+!output/README.md
+!output/**/README.md
+!output/**/.gitkeep
