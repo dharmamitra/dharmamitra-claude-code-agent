@@ -202,8 +202,16 @@ sharp tool:
 --include-collections / --exclude-collections ...
 --languages bo                                   # restrict parallels' language
 --par-length 50 --score 70                       # only substantial, high-confidence overlaps
+--not-before YEAR / --not-after YEAR             # date-window the parallels (Sanskrit only; CE, BCE negative)
 --sort position|length                           # ordering of the (complete) result
 ```
+
+`--not-before` / `--not-after` (Sanskrit only) restrict the matched parallels to target texts whose
+date estimate (from the sanskrit-dating model) falls in `[not_before, not_after]`. This is the
+**direction-of-borrowing** tool: for a text's possible *sources* use `--not-after <its date>`; for its
+*reception* use `--not-before <its date>`; it also drops chronologically impossible parallels (a 7th-c.
+text can't be a source for a 5th-c. one). The estimate has a credible interval, so treat the boundary
+as soft, and mark inferred direction as a suggestion.
 
 ### 3. `nexus.sh matches <segmentnr> …` — segment-level parallels (`POST /matches/`)
 
@@ -285,7 +293,9 @@ this maps *outward* from a text or segment to everything in the canon it touches
 4. **Cross the language boundary deliberately.** Use `--languages` and read `tgt_lang`;
    a cross-language parallel means transmission/translation, not just shared source.
 5. **Interpret with `score` + `par_length`** (long+high = substantive; short+high = stock
-   phrase) and `menu --meta` dates for direction of borrowing — mark direction as a suggestion.
+   phrase). For direction of borrowing, date-window the parallels with `--not-after <anchor date>`
+   (sources) / `--not-before <anchor date>` (reception) and read `menu --meta` dates — mark direction
+   as a suggestion (the date estimate is an interval).
 6. **Hand seams to the philologist.** Where a parallel *differs* from the anchor, that's a
    variant — recommend a critical-edition pass on those segmentnrs, one passage at a time.
 7. **Write the report** to `output/intertextuality/<work>.md`.

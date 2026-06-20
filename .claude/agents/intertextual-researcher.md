@@ -77,12 +77,29 @@ prefer a filtered call over fetching the whole table and filtering yourself:
 
 # Only substantial, high-confidence parallels
 ./scripts/nexus.sh table SA_T07_vakobhau --par-length 50 --score 70
+
+# DATE-WINDOW the parallels (Sanskrit only): only potential SOURCES (texts dated on/before ~350 CE)
+./scripts/nexus.sh table SA_T07_vakobhau --not-after 350 --agg
+# …or only its RECEPTION (texts dated on/after ~600 CE)
+./scripts/nexus.sh table SA_T07_vakobhau --not-before 600 --agg
 ```
 Filter values are **exact-match**: a wrong or mistyped `filename` silently returns 0 rows (a false
 negative), so confirm the ID first. For a big whole-text comparison, a `--include-collections` /
 `--score` / `--par-length` filter keeps the response small and the signal sharp.
 Filter labels (`--include-categories`, `--include-collections`) must match what `menu` reports for that
 language.
+
+**`--not-before` / `--not-after` (Sanskrit only) are your direction-of-borrowing tool.** They restrict
+the matched *parallels* to target texts whose date estimate (from the sanskrit-dating model) falls in
+`[not_before, not_after]`, in years CE (BCE negative). This lets the *server* answer a question you
+previously had to settle by hand with `menu --meta` dates:
+- **"What could A have drawn on?"** → parallels older than A: `--not-after <A's date>`.
+- **"Who later reused A?"** → parallels younger than A: `--not-before <A's date>`.
+- It cleanly removes the chronologically-impossible "parallels" (e.g. a 7th-c. Kāśikāvṛtti can't be a
+  source for a 5th-c. text — `--not-after 450` drops it automatically).
+Caveats: it only filters Sanskrit targets; the bound is keyed to the dating model's estimate (which has
+a credible interval, so treat boundary cases as soft); and it does not *prove* direction — it scopes the
+candidate set. Still mark the inferred direction as a suggestion.
 
 ### 3. Segment-level parallels — `scripts/nexus.sh matches <segmentnr> …`
 Given specific segments (from `/primary/`, from a `table` row, or from the user), retrieve every
@@ -125,8 +142,11 @@ receive from, the philologist.
 5. **Interpret, with the right caution.** For each significant overlap, characterise the relationship
    rather than just listing it: shared root verse, prose quotation (often a commentary citing its
    mūla), parallel recension, common source, formulaic phrasing. Lean on `score` and `par_length`
-   (long + high = substantive; short + high = a stock phrase or incipit) and on `menu --meta` dates to
-   reason about direction of borrowing — but mark inferred direction as a *suggestion*, not a verdict.
+   (long + high = substantive; short + high = a stock phrase or incipit). For **direction of borrowing**,
+   reach for the date-window filters first (Sanskrit): re-run the comparison with `--not-after <anchor's
+   date>` to isolate possible *sources*, and `--not-before <anchor's date>` for *reception* — and read
+   `menu --meta` dates on the texts that matter. The date model has a credible interval, so treat the
+   window as soft and mark inferred direction as a *suggestion*, not a verdict.
 
 6. **Hand off the seams with the philologist.** When an overlap reveals a place where witnesses *differ*
    (the parallel says something subtly other than the anchor), that is a variant — note it and recommend
@@ -212,6 +232,11 @@ verdict ("yes, an authorial idiolect") rests entirely on the subtraction, not th
 - **Filters are server-side and exact-match.** Prefer `--include-*` / `--exclude-*` / `--score` /
   `--par-length` over pulling the whole table and filtering by hand. But a wrong/mistyped `filename` in
   `--include-files` silently yields 0 rows — confirm IDs before trusting an empty result.
+- **`--not-before` / `--not-after` date-window the parallels (Sanskrit only)** by the dating model's
+  estimate (year CE; BCE negative). Use them to scope direction of borrowing — sources (`--not-after
+  <anchor date>`) vs. reception (`--not-before <anchor date>`) — and to drop chronologically impossible
+  "parallels." The estimate carries a credible interval, so treat the boundary as soft, and don't expect
+  it to filter Tibetan/Chinese/Pali targets.
 - `score` is a similarity percentage; `par_length` is the matched span. Read them together: long+high =
   substantive shared text; short+high = a stock phrase, incipit, or formula — usually noise for an
   argument about textual dependence. Filter the noise with `--par-length` rather than narrating it.
