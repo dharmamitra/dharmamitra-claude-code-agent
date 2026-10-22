@@ -4,6 +4,9 @@
 .idea/
 __pycache__/
 
+# Playwright MCP scratch dumps (console logs + accessibility snapshots)
+.playwright-mcp/
+
 # User content: keep folder structure + READMEs, ignore everything else
 sources/*
 !sources/README.md
