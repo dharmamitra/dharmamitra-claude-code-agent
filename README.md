@@ -45,6 +45,33 @@ Claude chunks the source into 3–5-sentence units and calls `cat-translate` ite
 
 If you've already translated chapters 1–3 elsewhere and want Claude to continue with chapter 4, drop that prior translation under `references/` — it'll be woven into the context for every call.
 
+## Translating with your own agent (research recipe)
+
+`/research-translate sources/<work>.bo.txt` has the agent running your session translate the text itself.
+DharmaMitra's APIs serve as its research tools, not as the translator. This works with whatever model you run.
+
+Before translating each paragraph, the agent researches it with two tools, each with its own budget:
+
+- **up to 3 search calls**: BM25 search over the canonical corpus. Each hit comes back with the published English translation of that passage where one is aligned (84000, Tsadra, …) and its parallels in the other canon languages.
+- **up to 3 dictionary calls**: MITRA dictionary entries built from word alignments of published translations: senses, attested renderings with counts, usage notes.
+
+Each call is a batch of queries or words. This is the setting that came out best in our paragraph benchmark (Tibetan, Sanskrit and Chinese → English, judged pairwise against published translations), well ahead of translating without research.
+
+**Better results with Gemini:** add `--engine gemini` (and set `GEMINI_API_KEY`, free at https://aistudio.google.com/apikey) to have Gemini 3.8 Flash do the research and translation, through `./scripts/gemini-translate.py`, with the same tools and budgets. In our Tibetan benchmark, Gemini 3.8 Flash at high thinking beat Claude Opus at high effort 25 to 13 in this setting (Gemini judge). Both recipes show this notice when they start.
+
+The output goes to `output/translations/<work>.research.md`, one section per paragraph: the source, the translation, and a short note on what the research settled. The tools are `./scripts/research.py search|dict|budget` (Python standard library only), so any agent that can run shell commands can follow the same recipe from `.claude/agents/research-translator.md`.
+
+## Translating a whole document (document recipe)
+
+`/document-translate sources/<work>.bo.txt` is the scholarly version for whole texts. It combines the per-paragraph research loop above (3 search + 3 dictionary calls per chunk) with document-level procedure, following Kurt Keutzer's revised translation instructions:
+- **Context carried between chunks:** the two previous chunks, the outline heading, and a project glossary that grows as the text proceeds.
+- **Analysis before rendering:** unit type, quotation boundaries, and a short parse of each sentence, written to a working file before the English.
+- **Checks:** a completeness check on every chunk, and an independent reviewer subagent on the harder chunks.
+- **Notes for the human reviser:** fixed footnote categories (G V D Q L U), and ⟦?⟧ markers on uncertain sentences.
+- **Effort tiers:** set from observable signals such as verse, debate, ambiguous parses and unresolved terms.
+
+Put an existing glossary, conventions, prior translations, commentaries or an outline under `references/<work>/`. The output goes to `output/documents/<work>/`: the translation (plus .docx if `pandoc` is installed), `glossary.md`, `work/chunk-NNN.md` working files, and a `summary.md` that lists the chunks a human should read first.
+
 ## Building a critical apparatus
 
 1. Put the anchor passage in `sources/`, or paste it inline.
@@ -71,8 +98,8 @@ Claude resolves the description to a DharmaNexus text via the offline matcher, t
 ├── CLAUDE.md                    # project context — read first by Claude
 ├── .claude/
 │   ├── settings.json            # allowlist + SessionStart hook that builds the corpus index
-│   ├── agents/                  # translator, philologist, intertextual-researcher, corpus-searcher, reference-reader
-│   └── commands/                # /translate, /find-parallels, /critical-edition, /intertextuality, /identify-text, /lookup-segment
+│   ├── agents/                  # translator, research-translator, document-translator, philologist, intertextual-researcher, corpus-searcher, reference-reader
+│   └── commands/                # /translate, /research-translate, /document-translate, /find-parallels, /critical-edition, /intertextuality, /identify-text, /lookup-segment
 ├── scripts/                     # curl wrappers + the local text identifier
 ├── sources/                     # ← drop source texts here
 ├── references/                  # ← drop glossaries / prior translations here
@@ -88,10 +115,11 @@ All public, JSON in / JSON out, synchronous:
 | Endpoint | Purpose | Wrapper | Latency |
 | --- | --- | --- | --- |
 | `POST /cat-translate/v1/translate` | Multi-witness translation with user-supplied context | `./scripts/cat-translate.sh` | 3–8 s |
-| `POST /primary/` | Search canonical corpus by meaning or exact text | `./scripts/primary-search.sh` | 0.3–3 s |
+| `POST /primary/` | Search canonical corpus by meaning or exact text | `./scripts/primary-search.sh`, `./scripts/research.py search` | 0.3–3 s |
 | `POST /api-db/matches/` | Every precomputed parallel for given segmentnrs | `./scripts/nexus.sh matches` | 1–5 s |
 | `GET /api-db/menudata/` | The corpus map for a language (collections → files) | `./scripts/nexus.sh menu` | 0.3–2 s |
 | `POST /api-db/table-view/table/` | A whole text's intersection with the rest of the corpus | `./scripts/nexus.sh table` | 1–5 s |
+| `GET dictionary.dharmamitra.org/api/summary` | MITRA dictionary entry (senses, attested renderings, usage) | `./scripts/research.py dict` | 0.2–2 s |
 
 Text identification (`./scripts/identify-text.py`) runs offline against the cached corpus map. Full reference and field schemas in `CLAUDE.md`.
 
