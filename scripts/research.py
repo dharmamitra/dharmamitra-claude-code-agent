@@ -17,15 +17,18 @@ data/research-budget/<ID>.json, and every call's full result is also saved there
 so output cut off on screen can be reread without spending another call. Standard library only.
 """
 import argparse
+import http.client
 import json
 import os
 import re
 import sys
+import threading
 import time
 import unicodedata
 import urllib.error
 import urllib.parse
 import urllib.request
+from concurrent.futures import ThreadPoolExecutor
 
 PRIMARY = 'https://dharmamitra.org/api-search/primary/'
 MATCHES = 'https://dharmamitra.org/api-db/matches/'
@@ -33,32 +36,48 @@ DICT = 'https://dictionary.dharmamitra.org/api/'
 UA = 'dharmamitra-claude-code-agent/1.0 (research.py)'
 BUDGET = {'search': 3, 'dict': 3}
 MAX_QUERIES, MAX_WORDS, HITS_PER_QUERY, ENTRY_CHARS = 20, 40, 3, 1800
+SEARCH_WORKERS, DICT_WORKERS = 3, 3  # concurrent requests; stays within the per-client limits with backoff
 LANG_NAME = {'EN': 'English', 'ZH': 'Chinese', 'SA': 'Sanskrit', 'BO': 'Tibetan', 'PA': 'Pali'}
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STATE = os.path.join(ROOT, 'data', 'research-budget')
-_last = [0.0]
 
 
-def http(url, body=None, min_gap=0.0):
-    """GET (body None) or POST JSON, with polite pacing and backoff on 429/5xx."""
+_tls = threading.local()
+
+
+def _conn(host):
+    """One keep-alive HTTPS connection per host and thread (a fresh TLS handshake through Cloudflare can take seconds)."""
+    pool = getattr(_tls, 'pool', None)
+    if pool is None:
+        pool = _tls.pool = {}
+    if host not in pool:
+        pool[host] = http.client.HTTPSConnection(host, timeout=90)
+    return pool[host]
+
+
+def http_json(url, body=None, min_gap=0.0):
+    """GET (body None) or POST JSON over a kept-alive connection, with backoff on 429/5xx and reconnect on errors."""
+    u = urllib.parse.urlsplit(url)
+    path = u.path + ('?' + u.query if u.query else '')
+    headers = {'User-Agent': UA, 'Content-Type': 'application/json', 'Connection': 'keep-alive'}
     for attempt in range(6):
-        wait = _last[0] + min_gap - time.time()
-        if wait > 0:
-            time.sleep(wait)
-        _last[0] = time.time()
-        data = json.dumps(body).encode() if body is not None else None
-        req = urllib.request.Request(url, data=data, headers={'User-Agent': UA, 'Content-Type': 'application/json'})
+        conn = _conn(u.netloc)
         try:
-            with urllib.request.urlopen(req, timeout=90) as r:
-                return json.loads(r.read())
-        except urllib.error.HTTPError as e:
-            if e.code in (429, 500, 502, 503, 504, 524) and attempt < 5:
+            conn.request('POST' if body is not None else 'GET', path,
+                         body=json.dumps(body).encode() if body is not None else None, headers=headers)
+            r = conn.getresponse()
+            data = r.read()
+            if r.status in (429, 500, 502, 503, 504, 524) and attempt < 5:
                 time.sleep(2 * 2 ** attempt)
                 continue
-            raise
-        except urllib.error.URLError:
+            if r.status >= 400:
+                raise urllib.error.HTTPError(url, r.status, r.reason, r.headers, None)
+            return json.loads(data)
+        except (http.client.HTTPException, OSError):
+            conn.close()
+            _tls.pool.pop(u.netloc, None)
             if attempt < 5:
-                time.sleep(2 * 2 ** attempt)
+                time.sleep(1 + attempt)
                 continue
             raise
 
@@ -91,15 +110,13 @@ def _excluded(ex, text):
 
 def search(lang, queries):
     ex = _exclusion()
-    hits_by_q = []
-    for q in queries:
+    def one(q):
         body = {'search_input': q, 'search_type': 'regular', 'do_ranking': False, 'filter_source_language': lang,
                 'include_vectors': False, 'max_results': HITS_PER_QUERY + 2}
         try:
-            res = http(PRIMARY, body, min_gap=0.4).get('results', [])
+            res = http_json(PRIMARY, body).get('results', [])
         except Exception as e:  # noqa: BLE001
-            hits_by_q.append((q, None, f'search failed: {e}'))
-            continue
+            return (q, None, f'search failed: {e}')
         seen, hits = set(), []
         for h in res:
             t = clean(h.get('text'))
@@ -113,13 +130,16 @@ def search(lang, queries):
                          'link': h.get('src_link', '')})
             if len(hits) >= HITS_PER_QUERY:
                 break
-        hits_by_q.append((q, hits, None))
+        return (q, hits, None)
+
+    with ThreadPoolExecutor(SEARCH_WORKERS) as pool:  # the API allows 3 requests/s per client
+        hits_by_q = list(pool.map(one, queries))
     # one /matches/ call for all hits of this batch
     segs = sorted({s for _, hits, _ in hits_by_q if hits for h in hits for s in h['segs']})[:120]
     matches = []
     if segs:
         try:
-            matches = http(MATCHES, {'segment_nrs': segs}, min_gap=0.4).get('matches', [])
+            matches = http_json(MATCHES, {'segment_nrs': segs}).get('matches', [])
         except Exception:  # noqa: BLE001
             matches = []
     out = []
@@ -227,7 +247,7 @@ def render_entry(js):
 
 
 def summary(term, lang):
-    js = http(DICT + 'summary?' + urllib.parse.urlencode({'term': term, 'lang': lang}), min_gap=0.25)
+    js = http_json(DICT + 'summary?' + urllib.parse.urlencode({'term': term, 'lang': lang}))
     return js if js.get('found') else None
 
 
@@ -236,7 +256,7 @@ def look_zh(w):
     parts = []
     for par in ('bo', 'sa'):
         try:
-            e = http(DICT + 'entry?' + urllib.parse.urlencode({'term': w, 'lang': 'zh', 'par': par}), min_gap=0.25)
+            e = http_json(DICT + 'entry?' + urllib.parse.urlencode({'term': w, 'lang': 'zh', 'par': par}))
         except Exception:  # noqa: BLE001
             continue
         rel = sorted(e.get('related') or [], key=lambda r: -r.get('count', 0))[:4]
@@ -259,8 +279,9 @@ def look(word, lang):
     if lang == 'zh':
         return look_zh(word)
     cands = bo_candidates(word) if lang == 'bo' else sa_candidates(word) if lang == 'sa' else [word]
-    for c in cands:
-        js = summary(c, lang)
+    with ThreadPoolExecutor(len(cands)) as ex:  # all spelling variants at once, first found in order wins
+        found = list(ex.map(lambda c: summary(c, lang), cands))
+    for c, js in zip(cands, found):
         if js:
             txt = render_entry(js)
             return txt if c == cands[0] else f'(nearest entry: {c})\n{txt}'
@@ -268,14 +289,15 @@ def look(word, lang):
 
 
 def dictionary(lang, words):
-    out = []
-    for w in words:
+    def one(w):
         try:
-            t = look(w, lang)
+            return look(w, lang)
         except Exception as e:  # noqa: BLE001
-            t = f'lookup failed: {e}'
-        out.append(f'### {w}\n{t or "not found (try the dictionary form, without particles or case endings)"}')
-    return '\n\n'.join(out)
+            return f'lookup failed: {e}'
+    with ThreadPoolExecutor(DICT_WORKERS) as ex:
+        res = list(ex.map(one, words))
+    return '\n\n'.join(f'### {w}\n{t or "not found (try the dictionary form, without particles or case endings)"}'
+                         for w, t in zip(words, res))
 
 
 # ---------- budget ----------
