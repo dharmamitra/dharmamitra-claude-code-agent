@@ -22,6 +22,7 @@ import os
 import re
 import sys
 import time
+import unicodedata
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -68,7 +69,28 @@ def clean(s):
 
 # ---------- search ----------
 
+def _norm(x):
+    return re.sub(r'[\s\W_]+', '', unicodedata.normalize('NFC', x or '').lower())
+
+
+def _exclusion():
+    """Evaluation only: RESEARCH_EXCLUDE=<json file with "src" and "ref"> drops hits that contain (or are contained in)
+    the passage being translated, and English parallels equal to a line of its reference translation."""
+    p = os.environ.get('RESEARCH_EXCLUDE')
+    if not p:
+        return None
+    d = json.load(open(p, encoding='utf-8'))
+    lines = [x for x in re.split(r'\n|(?<=[/。])', d.get('src', '')) if len(_norm(x)) >= 4]
+    return {'src': _norm(d.get('src')), 'sent': [_norm(x) for x in lines],
+            'ref': {_norm(x) for x in (d.get('ref') or '').split('\n') if len(_norm(x)) > 10}}
+
+
+def _excluded(ex, text):
+    a = _norm(text)
+    return bool(ex) and ((len(a) > 10 and a in ex['src']) or any(len(x) > 10 and x in a for x in ex['sent']))
+
 def search(lang, queries):
+    ex = _exclusion()
     hits_by_q = []
     for q in queries:
         body = {'search_input': q, 'search_type': 'regular', 'do_ranking': False, 'filter_source_language': lang,
@@ -81,7 +103,7 @@ def search(lang, queries):
         seen, hits = set(), []
         for h in res:
             t = clean(h.get('text'))
-            if not t or t in seen:
+            if not t or t in seen or _excluded(ex, t):
                 continue
             seen.add(t)
             segs = h.get('all_segmentnrs') or [h.get('segmentnr')]
@@ -115,7 +137,7 @@ def search(lang, queries):
             for m in sorted(mine, key=lambda m: -(m.get('score') or 0)):
                 code = (m.get('par_segnr') or ['??'])[0][:2]
                 pt = clean(m.get('par_text'))
-                if code == lang.upper() or not pt:
+                if code == lang.upper() or not pt or (ex and _norm(pt) in ex['ref']):
                     continue
                 name = clean((m.get('par_full_names') or {}).get('display_name'))[:60]
                 if code == 'EN':

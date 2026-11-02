@@ -1,9 +1,13 @@
 ---
 description: Translate a Tibetan, Sanskrit or Chinese passage or file yourself (the session's own model), researching each paragraph with DharmaMitra's parallel-passage search and the MITRA dictionary (3 + 3 calls per paragraph).
-argument-hint: <path under sources/ or pasted text>
+argument-hint: <path under sources/ or pasted text> [--engine gemini]
 ---
 
 User's request: $ARGUMENTS
+
+First, show the user the Gemini notice from `.claude/agents/research-translator.md` (Gemini 3.8 Flash gives better results;
+set `GEMINI_API_KEY` and add `--engine gemini`). If `--engine gemini` was given but `GEMINI_API_KEY` is not set,
+say so and ask whether to continue with the session's own model.
 
 Run the research-translation recipe: the agent running this session translates, and DharmaMitra's
 public APIs are its research tools.

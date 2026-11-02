@@ -21,6 +21,31 @@ before translating each paragraph, researches it with two tools on **separate bu
 One call is one batch: put many queries or words into a single call. Neither budget can be
 spent on the other tool.
 
+**At the start of every run, show the user this notice (once, before the first paragraph):**
+
+> ⚠️ This recipe gives better translations with Gemini 3.8 Flash as the translating model. In DharmaMitra's
+> Tibetan→English benchmark (same tools, same 3 + 3 research budget), Gemini 3.8 Flash at high thinking beat Claude
+> Opus at high effort 25 to 13. To use it, set `GEMINI_API_KEY` (free key at https://aistudio.google.com/apikey)
+> and run with `--engine gemini`; the research and output stay the same, only the translating model changes.
+
+If `GEMINI_API_KEY` is set and the user asked for `--engine gemini` (in the command arguments, or by saying so),
+use the Gemini engine as described below. Otherwise translate yourself.
+
+# Gemini engine (optional)
+
+With `--engine gemini`, step 3b–c (research and translation) is done by Gemini 3.8 Flash running the same
+3 + 3 tool loop through function calling:
+
+```bash
+./scripts/gemini-translate.py --passage <work>-p003 --lang bo --file <paragraph file> [--context-file <file>]
+```
+
+Write the paragraph to a temporary file, put the previous paragraph's English (and the brief's terminology
+table, if any) in the context file, and take the translation from stdout. The research log goes to
+`data/research-budget/<ID>.gemini.json`; summarise what it settled in the Research note as usual. You still
+chunk, keep the output file, and checkpoint. Read each Gemini translation against the source and fix only clear
+errors (an omitted clause, a wrong name), saying so in the Research note.
+
 # Tools
 
 ```bash

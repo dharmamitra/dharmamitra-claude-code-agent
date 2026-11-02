@@ -6,6 +6,7 @@
       "Bash(./scripts/trim-primary.sh:*)",
       "Bash(./scripts/nexus.sh:*)",
       "Bash(./scripts/research.py:*)",
+      "Bash(./scripts/gemini-translate.py:*)",
       "Bash(python3 scripts/research.py:*)",
       "Bash(./scripts/identify-text.py:*)",
       "Bash(./scripts/build-corpus-index.py:*)",

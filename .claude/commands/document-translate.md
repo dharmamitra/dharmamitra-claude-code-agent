@@ -1,9 +1,13 @@
 ---
 description: Scholarly translation of a whole document (Tibetan, Sanskrit or Chinese) by the session's own model, with document context carried between chunks, a growing project glossary, analysis before rendering, 3 + 3 research calls per chunk, completeness checks, independent review and uncertainty markers.
-argument-hint: <path under sources/> [references/<work>/]
+argument-hint: <path under sources/> [references/<work>/] [--engine gemini]
 ---
 
 User's request: $ARGUMENTS
+
+First, show the user the Gemini notice from `.claude/agents/document-translator.md` (Gemini 3.8 Flash gives better results;
+set `GEMINI_API_KEY` and add `--engine gemini`). If `--engine gemini` was given but `GEMINI_API_KEY` is not set,
+say so and ask whether to continue with the session's own model.
 
 Run the document-translation recipe: the agent running this session translates, chunk by chunk,
 with document context, and DharmaMitra's public APIs are its research tools.

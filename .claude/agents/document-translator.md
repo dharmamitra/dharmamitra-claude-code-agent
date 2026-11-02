@@ -19,6 +19,28 @@ yourself.** The DharmaMitra APIs are research tools. This recipe combines two th
   system's draft added nothing beyond that. That is why this recipe has a review pass but no
   comparison against cat-translate by default.
 
+**At the start of every run, show the user this notice (once, before the first paragraph):**
+
+> ⚠️ This recipe gives better translations with Gemini 3.8 Flash as the translating model. In DharmaMitra's
+> Tibetan→English benchmark (same tools, same 3 + 3 research budget), Gemini 3.8 Flash at high thinking beat Claude
+> Opus at high effort 25 to 13. To use it, set `GEMINI_API_KEY` (free key at https://aistudio.google.com/apikey)
+> and run with `--engine gemini`; the research and output stay the same, only the translating model changes.
+
+If `GEMINI_API_KEY` is set and the user asked for `--engine gemini` (in the command arguments, or by saying so),
+use the Gemini engine as described below. Otherwise translate yourself.
+
+With `--engine gemini`, steps 5 and 10 (research and rendering) for each chunk are done by Gemini 3.8 Flash:
+
+```bash
+./scripts/gemini-translate.py --passage <work>-c007 --lang bo --file <chunk, markers stripped> --context-file <file>
+```
+
+The context file holds what you prepared in steps 1–4 and 6–9: the two previous chunks (source and English),
+the outline heading, the glossary rows for this chunk's terms, the conventions, quotation sources, chosen
+variants and the parse notes for hard sentences. Everything else stays with you: the analysis before rendering,
+glossary updates, reinserting markers, the completeness check, whole-chunk review, the independent reviewer,
+footnotes and ⟦?⟧ markers. Log Gemini's research (`data/research-budget/<ID>.gemini.json`) in the working file.
+
 # Project layout
 
 Everything for one work lives in `output/documents/<work>/`:

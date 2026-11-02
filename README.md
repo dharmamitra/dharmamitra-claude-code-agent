@@ -57,6 +57,8 @@ Before translating each paragraph, the agent researches it with two tools, each 
 
 Each call is a batch of queries or words. This is the setting that came out best in our paragraph benchmark (Tibetan, Sanskrit and Chinese → English, judged pairwise against published translations), well ahead of translating without research.
 
+**Better results with Gemini:** add `--engine gemini` (and set `GEMINI_API_KEY`, free at https://aistudio.google.com/apikey) to have Gemini 3.8 Flash do the research and translation, through `./scripts/gemini-translate.py`, with the same tools and budgets. In our Tibetan benchmark, Gemini 3.8 Flash at high thinking beat Claude Opus at high effort 25 to 13 in this setting (Gemini judge). Both recipes show this notice when they start.
+
 The output goes to `output/translations/<work>.research.md`, one section per paragraph: the source, the translation, and a short note on what the research settled. The tools are `./scripts/research.py search|dict|budget` (Python standard library only), so any agent that can run shell commands can follow the same recipe from `.claude/agents/research-translator.md`.
 
 ## Translating a whole document (document recipe)
