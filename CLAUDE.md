@@ -252,6 +252,31 @@ not a metadata slot.
 5. **Append, don't rewrite.** Write to `output/translations/<work>.md` incrementally: each chunk as source-then-translation, with a small header noting model parameters. The translator agent rereads this file on the next chunk to build the rolling context — so don't rewrite the format mid-run.
 6. **Pause every ~5 chunks** to report progress and let the user adjust terminology or style before drift compounds. Translation drift is the single biggest failure mode of long-running translation runs — short feedback loops are cheap. When the user corrects terminology mid-run, *write the correction into the brief* before resuming so the next context build picks it up.
 
+### Research translation (`/research-translate`)
+
+Here **you** translate, and the APIs are research tools. Procedure in `.claude/agents/research-translator.md`.
+Per paragraph (about 500–900 source characters), you get **3 search calls and 3 dictionary calls on separate
+budgets**, each call a batch:
+
+```bash
+./scripts/research.py search --passage <work>-p003 --lang bo "<query>" "<query>"   # BM25 hits + aligned English + cross-language parallels
+./scripts/research.py dict   --passage <work>-p003 --lang bo "<word>" "<word>"     # MITRA dictionary entries
+./scripts/research.py budget --passage <work>-p003
+```
+
+`search` = `/primary/` with `search_type: "regular"`, `do_ranking: false`, `include_vectors: false`,
+`max_results` + one `/api-db/matches/` call for the hits. `dict` = `dictionary.dharmamitra.org/api/summary`
+(Tibetan, Sanskrit). Chinese is answered via `/api/entry` with its Tibetan and Sanskrit equivalents. Research
+results are evidence from other passages: choose what fits the context, never copy wholesale. Do not call
+cat-translate in this recipe.
+
+### Document translation (`/document-translate`)
+
+Whole texts, translated by you as scholarly translation: the same 3 + 3 research loop per chunk, plus document
+context (two previous chunks, outline, growing `glossary.md`), analysis written before rendering, completeness
+check, an independent reviewer subagent, footnote categories G V D Q L U, and ⟦?⟧ markers. Procedure and project
+layout (`output/documents/<work>/`) in `.claude/agents/document-translator.md`.
+
 ### Philology / critical edition
 
 1. **Anchor passage.** User points to a passage (paste or `sources/<work>:lines`). If it has multiple language witnesses, note them all.
@@ -329,14 +354,15 @@ before/after, you'd need a passage-detail endpoint that isn't in this kit.
 
 ```
 .claude/
-  agents/        — specialised subagents (translator, philologist, intertextual-researcher, …)
-  commands/      — slash commands (/translate, /find-parallels, /intertextuality, /identify-text, …)
+  agents/        — specialised subagents (translator, research-translator, document-translator, philologist, intertextual-researcher, …)
+  commands/      — slash commands (/translate, /research-translate, /document-translate, /find-parallels, /intertextuality, /identify-text, …)
   settings.json  — permissions allowlist + SessionStart hook that builds the corpus index
 scripts/         — wrapper scripts: cat-translate.sh, primary-search.sh, nexus.sh (intertextuality),
+                   research.py (search + dictionary tools with per-paragraph budgets),
                    identify-text.py + build-corpus-index.py + setup.sh (local text ID)
 sources/         — user drops source texts here (one file per language)
 references/      — user drops reference translations, glossaries, style guides
-output/          — your written output: translations/, critical-editions/, intertextuality/
+output/          — your written output: translations/, documents/, critical-editions/, intertextuality/
 data/            — generated cache (corpus-index.json); .gitignored, rebuilt on demand
 examples/        — sample request bodies for the endpoints
 ```
