@@ -20,6 +20,7 @@ import argparse
 import http.client
 import json
 import os
+import random
 import re
 import sys
 import threading
@@ -45,6 +46,10 @@ STATE = os.path.join(ROOT, 'data', 'research-budget')
 _tls = threading.local()
 
 
+class ApiError(Exception):
+    pass
+
+
 def _conn(host):
     """One keep-alive HTTPS connection per host and thread (a fresh TLS handshake through Cloudflare can take seconds)."""
     pool = getattr(_tls, 'pool', None)
@@ -68,18 +73,29 @@ def http_json(url, body=None, min_gap=0.0):
             r = conn.getresponse()
             data = r.read()
             if r.status in (429, 500, 502, 503, 504, 524) and attempt < 5:
-                time.sleep(2 * 2 ** attempt)
+                time.sleep(_backoff(attempt, r.getheader('Retry-After')))
                 continue
             if r.status >= 400:
-                raise urllib.error.HTTPError(url, r.status, r.reason, r.headers, None)
+                raise ApiError(f'HTTP {r.status} {r.reason}')
             return json.loads(data)
         except (http.client.HTTPException, OSError):
             conn.close()
-            _tls.pool.pop(u.netloc, None)
+            getattr(_tls, 'pool', {}).pop(u.netloc, None)
             if attempt < 5:
-                time.sleep(1 + attempt)
+                time.sleep(_backoff(attempt))
                 continue
             raise
+
+
+def _backoff(attempt, retry_after=None):
+    """Wait before retry `attempt`: the server's Retry-After if it sent one, else 2, 4, 8, 16, 32 s, each with
+    random jitter so parallel threads and parallel users do not retry in lockstep."""
+    try:
+        if retry_after:
+            return float(retry_after) + random.uniform(0, 1)
+    except ValueError:
+        pass
+    return 2 * 2 ** attempt * random.uniform(0.5, 1.5)
 
 
 def clean(s):
@@ -338,6 +354,14 @@ def main():
     st[a.tool] += 1
     save(a.passage, st)
     text = search(a.lang, a.items[:MAX_QUERIES]) if a.tool == 'search' else dictionary(a.lang, a.items[:MAX_WORDS])
+    blocks = [b for b in text.split('### ')[1:]]
+    if blocks and all(('search failed:' in b or 'lookup failed:' in b) for b in blocks):
+        st[a.tool] -= 1  # the API was unavailable (e.g. rate-limited): this call does not count
+        save(a.passage, st)
+        print(text)
+        print(f"\n[every request in this call failed, so it was not counted; wait a minute and retry. "
+              f"{BUDGET['search'] - st['search']} search and {BUDGET['dict'] - st['dict']} dictionary calls left]")
+        return
     cache = os.path.join(STATE, re.sub(r'[^A-Za-z0-9._-]+', '_', a.passage) + f'.{a.tool}{st[a.tool]}.md')
     open(cache, 'w', encoding='utf-8').write(text + '\n')
     print(text)

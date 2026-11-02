@@ -18,6 +18,7 @@ import argparse
 import importlib.util
 import json
 import os
+import random
 import re
 import sys
 import time
@@ -99,7 +100,7 @@ def gemini(contents, system, decls, level, key, final=False):
                 break
         except (urllib.error.URLError, TimeoutError) as e:
             err = str(e)
-        time.sleep(2 * 2 ** attempt)
+        time.sleep(2 * 2 ** attempt * random.uniform(0.5, 1.5))
     sys.exit(f'gemini-translate: {err}')
 
 
@@ -151,7 +152,12 @@ def main():
                     out = R.search(a.lang, items[:R.MAX_QUERIES])
                 else:
                     out = R.dictionary(a.lang, items[:R.MAX_WORDS])
-                used.add(kind)
+                blocks = out.split('### ')[1:]
+                if blocks and all(('search failed:' in b or 'lookup failed:' in b) for b in blocks):
+                    time.sleep(30)  # API unavailable (rate limit): not counted, the model may call again
+                    out += '\n\n(The research API was temporarily unavailable; this call was not counted.)'
+                else:
+                    used.add(kind)
                 log.append({'tool': kind, 'items': items, 'result': out})
             else:
                 out = f"The budget for {fc.get('name')} is used up."
