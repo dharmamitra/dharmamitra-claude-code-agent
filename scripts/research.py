@@ -1,0 +1,306 @@
+#!/usr/bin/env python3
+"""Research tools for the /research-translate recipe: parallel-passage search and MITRA dictionary lookup,
+each with its own per-passage budget of 3 calls (the "3 + 3" setting).
+
+  ./scripts/research.py search --passage ID --lang bo QUERY [QUERY ...]   (<= 20 queries per call)
+  ./scripts/research.py dict   --passage ID --lang bo WORD [WORD ...]     (<= 40 words per call)
+  ./scripts/research.py budget --passage ID                               (calls left)
+
+search: BM25 over the canonical corpus (POST /api-search/primary/, search_type=regular, no reranking), then the
+        DharmaNexus parallels of every hit (POST /api-db/matches/): the published English translation of the
+        passage where one is aligned (84000, Tsadra, ...) and parallels in the other canon languages.
+dict:   MITRA dictionary entries (dictionary.dharmamitra.org /api/summary): senses, attested renderings with
+        counts, usage notes. Tibetan (Unicode or Wylie) and Sanskrit (IAST) headwords; Chinese terms are answered
+        with their attested Tibetan and Sanskrit equivalents and the meaning of the main one.
+One call = one batch. A call beyond the budget prints a notice and does nothing. Budgets live in
+data/research-budget/<ID>.json, and every call's full result is also saved there (<ID>.search1.md, ...),
+so output cut off on screen can be reread without spending another call. Standard library only.
+"""
+import argparse
+import json
+import os
+import re
+import sys
+import time
+import urllib.error
+import urllib.parse
+import urllib.request
+
+PRIMARY = 'https://dharmamitra.org/api-search/primary/'
+MATCHES = 'https://dharmamitra.org/api-db/matches/'
+DICT = 'https://dictionary.dharmamitra.org/api/'
+UA = 'dharmamitra-claude-code-agent/1.0 (research.py)'
+BUDGET = {'search': 3, 'dict': 3}
+MAX_QUERIES, MAX_WORDS, HITS_PER_QUERY, ENTRY_CHARS = 20, 40, 3, 1800
+LANG_NAME = {'EN': 'English', 'ZH': 'Chinese', 'SA': 'Sanskrit', 'BO': 'Tibetan', 'PA': 'Pali'}
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+STATE = os.path.join(ROOT, 'data', 'research-budget')
+_last = [0.0]
+
+
+def http(url, body=None, min_gap=0.0):
+    """GET (body None) or POST JSON, with polite pacing and backoff on 429/5xx."""
+    for attempt in range(6):
+        wait = _last[0] + min_gap - time.time()
+        if wait > 0:
+            time.sleep(wait)
+        _last[0] = time.time()
+        data = json.dumps(body).encode() if body is not None else None
+        req = urllib.request.Request(url, data=data, headers={'User-Agent': UA, 'Content-Type': 'application/json'})
+        try:
+            with urllib.request.urlopen(req, timeout=90) as r:
+                return json.loads(r.read())
+        except urllib.error.HTTPError as e:
+            if e.code in (429, 500, 502, 503, 504, 524) and attempt < 5:
+                time.sleep(2 * 2 ** attempt)
+                continue
+            raise
+        except urllib.error.URLError:
+            if attempt < 5:
+                time.sleep(2 * 2 ** attempt)
+                continue
+            raise
+
+
+def clean(s):
+    return re.sub(r'\s+', ' ', s or '').strip()
+
+
+# ---------- search ----------
+
+def search(lang, queries):
+    hits_by_q = []
+    for q in queries:
+        body = {'search_input': q, 'search_type': 'regular', 'do_ranking': False, 'filter_source_language': lang,
+                'include_vectors': False, 'max_results': HITS_PER_QUERY + 2}
+        try:
+            res = http(PRIMARY, body, min_gap=0.4).get('results', [])
+        except Exception as e:  # noqa: BLE001
+            hits_by_q.append((q, None, f'search failed: {e}'))
+            continue
+        seen, hits = set(), []
+        for h in res:
+            t = clean(h.get('text'))
+            if not t or t in seen:
+                continue
+            seen.add(t)
+            segs = h.get('all_segmentnrs') or [h.get('segmentnr')]
+            if isinstance(segs, str):
+                segs = re.findall(r"[A-Z]{2}_[^',\]\s]+", segs)
+            hits.append({'text': t, 'title': clean(h.get('title')), 'segs': [s for s in segs if s][:8],
+                         'link': h.get('src_link', '')})
+            if len(hits) >= HITS_PER_QUERY:
+                break
+        hits_by_q.append((q, hits, None))
+    # one /matches/ call for all hits of this batch
+    segs = sorted({s for _, hits, _ in hits_by_q if hits for h in hits for s in h['segs']})[:120]
+    matches = []
+    if segs:
+        try:
+            matches = http(MATCHES, {'segment_nrs': segs}, min_gap=0.4).get('matches', [])
+        except Exception:  # noqa: BLE001
+            matches = []
+    out = []
+    for q, hits, err in hits_by_q:
+        out.append(f'### {q}')
+        if err:
+            out.append(err)
+            continue
+        if not hits:
+            out.append('no hits')
+            continue
+        for h in hits:
+            mine = [m for m in matches if set(m.get('root_segnr') or []) & set(h['segs'])]
+            par, en = {}, []
+            for m in sorted(mine, key=lambda m: -(m.get('score') or 0)):
+                code = (m.get('par_segnr') or ['??'])[0][:2]
+                pt = clean(m.get('par_text'))
+                if code == lang.upper() or not pt:
+                    continue
+                name = clean((m.get('par_full_names') or {}).get('display_name'))[:60]
+                if code == 'EN':
+                    if len(en) < 2 and all(pt != e[1] for e in en):
+                        en.append((clean(m.get('root_text'))[:120], pt[:350], name))
+                elif code not in par:
+                    par[code] = f'{LANG_NAME.get(code, code)} ({name}): {pt[:300]}'
+            lines = [f'- {h["text"][:350]}', f'  [{h["title"][:80]}] {h["link"]}']
+            lines += [f'  = English ({n}) for the source line "{r}…": {t}' for r, t, n in en]
+            lines += [f'  = {par[c]}' for c in ('SA', 'ZH', 'BO', 'PA') if c in par]
+            out.append('\n'.join(lines))
+    return '\n\n'.join(out)
+
+
+# ---------- dictionary ----------
+
+BO_PARTICLES = ('ཀྱི', 'གྱི', 'གི', 'ཡི', 'ཀྱིས', 'གྱིས', 'གིས', 'ཡིས', 'ལ', 'ན', 'དུ', 'ཏུ', 'སུ', 'རུ', 'ལས', 'ནས',
+                'དང', 'ནི', 'ཏེ', 'སྟེ', 'དེ', 'ཅིང', 'ཞིང', 'ཤིང', 'ཀྱང', 'ཡང', 'འང', 'ཅེས', 'ཞེས', 'ཤེས')
+NOMINALISERS = ('པ', 'བ', 'པོ', 'བོ')
+SA_ENDINGS = [('asya', 'a'), ('ānām', 'a'), ('ebhyaḥ', 'a'), ('eṣu', 'a'), ('aiḥ', 'a'), ('ena', 'a'), ('āya', 'a'),
+              ('āt', 'a'), ('āni', 'a'), ('āḥ', 'a'), ('aḥ', 'a'), ('am', 'a'), ('aṃ', 'a'), ('e', 'a'), ('āyāḥ', 'ā'),
+              ('āyām', 'ā'), ('ayā', 'ā'), ('ām', 'ā'), ('āṃ', 'ā'), ('ayaḥ', 'i'), ('ibhiḥ', 'i'), ('eḥ', 'i'),
+              ('iḥ', 'i'), ('im', 'i'), ('oḥ', 'u'), ('uḥ', 'u'), ('um', 'u'), ('ā', 'a'), ('ī', 'in'), ('inaḥ', 'in'),
+              ('ā', 'an'), ('ānam', 'an'), ('tā', 'tṛ'), ('vān', 'vat'), ('mān', 'mat'), ('ḥ', ''), ('ṃ', ''), ('m', '')]
+
+
+def bo_candidates(w):
+    w = w.strip().strip('་།༎ /')
+    syl = [s for s in re.split('[་]+', w) if s]
+    cands = [w]
+    if syl and syl[-1] in BO_PARTICLES and len(syl) > 1:
+        cands.append('་'.join(syl[:-1]))
+    for c in list(cands):
+        s = c.split('་')
+        last = s[-1]
+        for suf in ('འི', 'འོ', 'ས', 'ར'):  # genitive/terminating/agentive/terminative fused to the last syllable
+            if last.endswith(suf) and len(last) > len(suf):
+                base = last[:-len(suf)]
+                if suf in ('འི', 'འོ'):  # dpa'i -> dpa', lha'i -> lha
+                    cands.append('་'.join(s[:-1] + [base + 'འ']))
+                cands.append('་'.join(s[:-1] + [base]))
+                if suf in ('ས', 'ར'):
+                    cands.append('་'.join(s[:-1] + [base + 'འ']))
+    for c in list(cands):
+        s = c.split('་')
+        cands.append('་'.join(s[:-1]) if s[-1] in NOMINALISERS and len(s) > 1 else c + '་པ')
+    if len(syl) >= 3:  # sub-phrases of a long term: without its first syllable(s), without its last one
+        cands += ['་'.join(syl[1:]), '་'.join(syl[2:]), '་'.join(syl[:-1])]
+    out = []
+    for c in cands:
+        if c and c not in out:
+            out.append(c)
+    return out[:8]
+
+
+def sa_candidates(w):
+    w = w.strip().strip('/|.,;:!?()-–—\'"“”').replace('-', '')
+    cands = [w]
+    for e, r in SA_ENDINGS:
+        if w.endswith(e) and len(w) > len(e) + 1:
+            cands.append(w[:-len(e)] + r)
+    out = []
+    for c in cands:
+        if c and c not in out:
+            out.append(c)
+    return out[:6]
+
+
+def render_entry(js):
+    head = js.get('head') or js.get('term')
+    lines = [f"{js.get('head_unicode') or head}" + (f' ({head})' if js.get('head_unicode') and head else '')]
+    for i, s in enumerate((js.get('senses') or [])[:6], 1):
+        t = f'{i}. {clean(s.get("definition"))}'
+        if s.get('note'):
+            t += f' Note: {clean(s["note"])}'
+        rend = []
+        for lg in ('en', 'sa', 'bo', 'zh'):
+            xs = (s.get('rend') or {}).get(lg) or []
+            if xs:
+                rend.append(f"{LANG_NAME[lg.upper()]}: " + ', '.join(f"{x.get('u') or x['g']} ({x['n']})" for x in xs[:5]))
+        if rend:
+            t += ' [' + '; '.join(rend) + ']'
+        lines.append(t)
+    if js.get('usage'):
+        lines.append('Usage: ' + clean(js['usage']))
+    return '\n'.join(lines)[:ENTRY_CHARS]
+
+
+def summary(term, lang):
+    js = http(DICT + 'summary?' + urllib.parse.urlencode({'term': term, 'lang': lang}), min_gap=0.25)
+    return js if js.get('found') else None
+
+
+def look_zh(w):
+    w = re.sub(r'[\s，。、；：「」『』？！]', '', w)
+    parts = []
+    for par in ('bo', 'sa'):
+        try:
+            e = http(DICT + 'entry?' + urllib.parse.urlencode({'term': w, 'lang': 'zh', 'par': par}), min_gap=0.25)
+        except Exception:  # noqa: BLE001
+            continue
+        rel = sorted(e.get('related') or [], key=lambda r: -r.get('count', 0))[:4]
+        if rel:
+            parts.append((par, rel))
+    if not parts:
+        return None
+    lines = [f'{w}: attested as the Chinese rendering of']
+    for par, rel in parts:
+        lines.append(f"- {LANG_NAME[par.upper()]}: " + ', '.join(
+            f"{r['word']}{' (' + r['wylie'] + ')' if r.get('wylie') else ''} ({r.get('count', 0)}x)" for r in rel))
+    par, rel = parts[0]
+    top = summary(rel[0]['word'], par)
+    if top and top.get('senses'):
+        lines.append(f"Main equivalent {rel[0]['word']}: {clean(top['senses'][0].get('definition'))}")
+    return '\n'.join(lines)[:ENTRY_CHARS]
+
+
+def look(word, lang):
+    if lang == 'zh':
+        return look_zh(word)
+    cands = bo_candidates(word) if lang == 'bo' else sa_candidates(word) if lang == 'sa' else [word]
+    for c in cands:
+        js = summary(c, lang)
+        if js:
+            txt = render_entry(js)
+            return txt if c == cands[0] else f'(nearest entry: {c})\n{txt}'
+    return None
+
+
+def dictionary(lang, words):
+    out = []
+    for w in words:
+        try:
+            t = look(w, lang)
+        except Exception as e:  # noqa: BLE001
+            t = f'lookup failed: {e}'
+        out.append(f'### {w}\n{t or "not found (try the dictionary form, without particles or case endings)"}')
+    return '\n\n'.join(out)
+
+
+# ---------- budget ----------
+
+def state_path(pid):
+    return os.path.join(STATE, re.sub(r'[^A-Za-z0-9._-]+', '_', pid) + '.json')
+
+
+def load(pid):
+    p = state_path(pid)
+    return json.load(open(p)) if os.path.exists(p) else {'search': 0, 'dict': 0}
+
+
+def save(pid, st):
+    os.makedirs(STATE, exist_ok=True)
+    json.dump(st, open(state_path(pid), 'w'))
+
+
+def main():
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument('tool', choices=['search', 'dict', 'budget'])
+    ap.add_argument('--passage', required=True, help='passage id, e.g. vajracchedika-p007')
+    ap.add_argument('--lang', choices=['bo', 'sa', 'zh', 'pa'], help='source language')
+    ap.add_argument('items', nargs='*', help='queries (search) or words (dict)')
+    a = ap.parse_args()
+    st = load(a.passage)
+    if a.tool == 'budget':
+        print(f"search calls left: {BUDGET['search'] - st['search']}, dictionary calls left: {BUDGET['dict'] - st['dict']}")
+        return
+    if not a.lang or not a.items:
+        sys.exit('--lang and at least one query/word are required')
+    if a.tool == 'dict' and a.lang == 'pa':
+        sys.exit('the MITRA dictionary has no Pali entries; use search for Pali')
+    if st[a.tool] >= BUDGET[a.tool]:
+        print(f'The {a.tool} budget for this passage ({BUDGET[a.tool]} calls) is used up. '
+              'Use what you have and write the translation.')
+        return
+    st[a.tool] += 1
+    save(a.passage, st)
+    text = search(a.lang, a.items[:MAX_QUERIES]) if a.tool == 'search' else dictionary(a.lang, a.items[:MAX_WORDS])
+    cache = os.path.join(STATE, re.sub(r'[^A-Za-z0-9._-]+', '_', a.passage) + f'.{a.tool}{st[a.tool]}.md')
+    open(cache, 'w', encoding='utf-8').write(text + '\n')
+    print(text)
+    print(f"\n[full result saved to {os.path.relpath(cache, ROOT)}]")
+    print(f"[{a.tool} call {st[a.tool]} of {BUDGET[a.tool]} for passage {a.passage}; "
+          f"{BUDGET['search'] - st['search']} search and {BUDGET['dict'] - st['dict']} dictionary calls left]")
+
+
+if __name__ == '__main__':
+    main()
