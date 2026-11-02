@@ -183,20 +183,18 @@ Use it to discover the exact `category` / `collection` labels for `table` filter
 
 ### 2. `nexus.sh table <filename>` — whole-text intersection (`POST /table-view/table/`)
 
-The core macro-intertextuality view. **Start with `--agg`, but census with `--all` before concluding:**
+The core macro-intertextuality view. Every call returns the **complete** intersection in one response
+(the wrapper sets `skip_pagination`), so `--agg` is a full census, not a sample:
 
 ```bash
-./scripts/nexus.sh table SA_T07_vakobhau --agg          # quick survey — PAGE 0 ONLY (first 100 rows)
-./scripts/nexus.sh table SA_T07_vakobhau --agg --all    # COMPLETE census — auto-paginates every page
+./scripts/nexus.sh table SA_T07_vakobhau --agg          # COMPLETE per-target-text census
 ./scripts/nexus.sh table SA_T07_vakobhau                # segment-level rows (aligned root/par text, score, langs)
 ```
 
-The API returns 100 rows/page; a plain call (and `--agg` over it) sees only page 0. For a
-densely-connected text that undercounts badly (e.g. 51 neighbours on page 0 vs. 700+ with `--all`),
-and a rare target may not appear at all. Use `--all` whenever a count matters or you'd otherwise miss a
-neighbour; it paces requests and backs off the endpoint's rate limit (429) automatically, and warns if
-it hits the 10k-row cap. Rich filters are applied **server-side** — for a focused "does A relate to B"
-question, `--include-files <B> --all` is both cheap and complete:
+The complete table of a well-connected text is large but real (e.g. the Abhidharmakośabhāṣya touches
+830+ texts) and can be several MB / a few seconds — `--agg` is how you make it legible. Rich filters are
+applied **server-side** — for a focused "does A relate to B" question, `--include-files <B>` is the
+sharp tool:
 
 ```bash
 --include-files / --exclude-files A,B            # vs. specific text(s)
@@ -204,8 +202,16 @@ question, `--include-files <B> --all` is both cheap and complete:
 --include-collections / --exclude-collections ...
 --languages bo                                   # restrict parallels' language
 --par-length 50 --score 70                       # only substantial, high-confidence overlaps
---sort position|length   --page N                # 100 rows/page
+--not-before YEAR / --not-after YEAR             # date-window the parallels (Sanskrit only; CE, BCE negative)
+--sort position|length                           # ordering of the (complete) result
 ```
+
+`--not-before` / `--not-after` (Sanskrit only) restrict the matched parallels to target texts whose
+date estimate (from the sanskrit-dating model) falls in `[not_before, not_after]`. This is the
+**direction-of-borrowing** tool: for a text's possible *sources* use `--not-after <its date>`; for its
+*reception* use `--not-before <its date>`; it also drops chronologically impossible parallels (a 7th-c.
+text can't be a source for a 5th-c. one). The estimate has a credible interval, so treat the boundary
+as soft, and mark inferred direction as a suggestion.
 
 ### 3. `nexus.sh matches <segmentnr> …` — segment-level parallels (`POST /matches/`)
 
@@ -312,10 +318,28 @@ this maps *outward* from a text or segment to everything in the canon it touches
 4. **Cross the language boundary deliberately.** Use `--languages` and read `tgt_lang`;
    a cross-language parallel means transmission/translation, not just shared source.
 5. **Interpret with `score` + `par_length`** (long+high = substantive; short+high = stock
-   phrase) and `menu --meta` dates for direction of borrowing — mark direction as a suggestion.
+   phrase). For direction of borrowing, date-window the parallels with `--not-after <anchor date>`
+   (sources) / `--not-before <anchor date>` (reception) and read `menu --meta` dates — mark direction
+   as a suggestion (the date estimate is an interval).
 6. **Hand seams to the philologist.** Where a parallel *differs* from the anchor, that's a
    variant — recommend a critical-edition pass on those segmentnrs, one passage at a time.
 7. **Write the report** to `output/intertextuality/<work>.md`.
+
+**Worked pattern — authorial reuse vs. boilerplate (the subtraction).** A raw overlap list rarely
+answers a real question; two texts can share a passage because one author reused his own phrasing
+(interesting), or because both quote a sūtra or repeat a stock definition (not). Separate them in two
+steps: (1) get the candidate overlaps with a server-filtered census,
+`nexus.sh table <A> --include-files <B>`; (2) for each substantive pair, run
+`nexus.sh matches <A-segmentnr> --agg` to see *every* text sharing that passage. If the parallels
+**collapse onto a small meaningful set** (e.g. one author's other works) it's distinctive; if they're
+**spread across many unrelated texts** it's boilerplate; if **dominated by canonical witnesses** it's a
+shared scriptural quotation. Exclude self-recensions of the anchor from the count.
+*Example:* to test whether Sthiramati's Madhyāntavibhāgaṭīkā (`SA_T06_sthmavtyg`) shares *distinctively
+his* material with his Triṃśikābhāṣya (`SA_T06_sthtvbh`) and Pañcaskandhakavibhāṣā (`SA_T06_pskvbhu`),
+`table --include-files` found 113 + 81 parallels, but only the ones whose `matches --agg` census
+collapsed onto Sthiramati's own works (e.g. the *paratantra* etymology) counted — the pratītyasamutpāda
+formula, attested in 19 texts, was filtered out as scriptural. The verdict rests on the subtraction,
+not the raw count.
 
 ### Direct segment lookup
 
@@ -347,8 +371,7 @@ before/after, you'd need a passage-detail endpoint that isn't in this kit.
 - Don't lose the per-witness segmentnr when citing — that's the philological audit trail.
 - Don't strip `summary` from `/primary/` results before triage; it's often the only signal that a hit is a quotation in a commentary vs. the canonical text itself.
 - Don't read an empty `nexus.sh table` result as "no intertextual relationship" — not every text's overlaps are precomputed, and a mistyped filter `filename` silently returns 0. Confirm the ID, then fall back to the root text or to `matches` / `/primary/` on its segments.
-- Don't draw a count or a yes/no from a non-`--all` `table` — bare results are page 0 only (100 rows) and can undercount by 10×. Census with `--all`, or filter server-side with `--include-files <B> --all`.
-- Don't dump every row of a large `table` result into the report — lead with the `--agg` shape, then quote the parallels that carry the argument.
+- Don't dump every row of a large `table` result into the report — `table` returns the complete intersection, so lead with the `--agg` shape, then quote the parallels that carry the argument.
 
 ## Folder layout
 

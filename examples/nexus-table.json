@@ -13,5 +13,6 @@
   },
   "page": 0,
   "sort_method": "position",
-  "folio": ""
+  "folio": "",
+  "skip_pagination": true
 }
